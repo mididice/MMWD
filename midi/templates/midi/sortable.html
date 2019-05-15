@@ -3,24 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Sortable - Default functionality</title>
+  <title>jQuery UI Sortable with midiDice</title>
   <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
   <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
   <style>
   #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 30px; }
   #sortable li span { position: absolute; margin-left: -1.3em; }
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
-    $( "#sortable" ).sortable();
+    $( "#sortable" ).sortable({
+    // items: '.ui-state-default:not(.fixed)'
+      cancel: ".fixed",
+      items: '.ui-state-default:not(.fixed)'
+    });
     $( "#sortable" ).disableSelection();
   } );
     $(document).on('click', '#add', function(e) {
         // e.preventDefault();
-        $(this).parent().after("<li class='ui-state-default'>item</li>").sortable()
+        var premidi = $(this).parent().val();
+        var nexmidi = $(this).parent().next().val();
+        console.log(premidi, nexmidi)
+        $(this).parent().addClass('fixed');
+        $(this).parent().next().addClass('fixed');
+        $(this).parent().after("<li class='ui-state-default fixed'>item</li>").sortable();
         // $("#sortable").sortable('refresh');
         // alert('clicked')
   });
@@ -41,13 +50,15 @@
 <body>
  <button class="btn">추가하기</button>
 <ul id="sortable">
-  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1<button id="add">add</button></li>
-  <li class="ui-state-default2"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-  <li class="ui-state-default3"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+<li class="fixed"></li>
+  <li class="ui-state-default" value="01"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+  <li class="ui-state-default" value="02"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+  <li class="ui-state-default" value="03"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3<button id="add">add</button></li>
+  <li class="ui-state-default" value="04"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+  <li class="ui-state-default" value="05"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+  <li class="ui-state-default" value="06"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+  <li class="ui-state-default" value="07"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+  <li class="ui-state-default fixed"></li>
 </ul>
  
  
