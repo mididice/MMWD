@@ -7,9 +7,17 @@
   <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
   <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
   <style>
+  audio { width: 250px; }
   #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 30px; }
-  #sortable li span { position: absolute; margin-left: -1.3em; }
+  #sortable li { border:1px solid #000; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 54px; }
+  #sortable li span { margin-left: 1.3em; }
+  /*@keyframes animation { 0% { opacity: 0;
+    transform: translate3d(0, 100px, 0) scale(0.9); } 100% { opacity: 1; transform: none; } }
+  ul { padding-top: 50px; font-size: 0; }
+  ul li { height: 50px; background:  #ffff80; }*/
+  /*ul li:nth-child(2) { animation: animation 0.5s cubic-bezier(0.71, 0.5, 0.69, 1.4) backwards; animation-delay: 0.2s; }
+  ul li:nth-child(3) { animation: animation 0.5s cubic-bezier(0.71, 0.5, 0.69, 1.4) backwards; animation-delay: 0.4s; }*/
+  /*ul li:nth-child(4) { animation: animation 0.5s cubic-bezier(0.71, 0.5, 0.69, 1.4) backwards; animation-delay: 0.6s; }*/*/
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -17,32 +25,48 @@
   $( function() {
     $( "#sortable" ).sortable({
     // items: '.ui-state-default:not(.fixed)'
-      cancel: ".fixed",
-      items: '.ui-state-default:not(.fixed)'
+      forceHelperSize: true,
+      cancel: ".fixed, .cancelled",
+      items: '.ui-state-default:not(.fixed)',
+      change: function(event, ui){
+      },
+      update: function(event, ui){
+        $('.ui-icon').each(function(){
+          $(this).next().next().attr("disabled", false);
+        });
+        $('.ui-icon').filter(':last').next().next().attr("disabled", true);
+      }
     });
     $( "#sortable" ).disableSelection();
   } );
-    $(document).on('click', '#add', function(e) {
+    $(document).on('click', '.btn-vae', function(e) {
         // e.preventDefault();
         var premidi = $(this).parent().val();
         var nexmidi = $(this).parent().next().val();
         console.log(premidi, nexmidi)
         $(this).parent().addClass('fixed');
         $(this).parent().next().addClass('fixed');
-        $(this).parent().after("<li class='ui-state-default fixed'>item</li>").sortable();
+        $(this).parent().after("<li class='ui-state-default fixed'>item"+premidi+"+"+nexmidi+"</li>").sortable();
+        $(this).remove();
         // $("#sortable").sortable('refresh');
         // alert('clicked')
   });
   $(document).ready(function(){
+    console.log($('.ui-state-default').length);
+    var lilength = $('.ui-state-default').length;
+    var second = 0*1;
+    var delay = (1/lilength)*1;
+    console.log(second, delay)
+    $('.ui-state-default').each(function(){
+      second = (delay + second).toFixed(1)*1;
+      $(this).css({
+        "animation": "animation 0.5s cubic-bezier(0.71, 0.5, 0.69, 1.4) backwards",
+        "animation-delay": second+"s"});
+    });
+
     $(".btn").click(function (e) {
     e.preventDefault();
-    var text = "Item";
-    var $li = $("<li class='ui-state-default'></li>").text(text);
-    $li.append("<span class='ui-icon ui-icon-arrowthick-2-n-s'></span>");
-    $li.append("<button id='add'>add</button>");
-    console.log($("#sortable"))
-    $("#sortable").append($li);
-    $("#sortable").sortable('refresh');
+    console.log($('.ui-icon'));
     });
   });
   </script>
@@ -50,17 +74,17 @@
 <body>
  <button class="btn">추가하기</button>
 <ul id="sortable">
-<li class="fixed"></li>
-  <li class="ui-state-default" value="01"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-  <li class="ui-state-default" value="02"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-  <li class="ui-state-default" value="03"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3<button id="add">add</button></li>
-  <li class="ui-state-default" value="04"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-  <li class="ui-state-default" value="05"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-  <li class="ui-state-default" value="06"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-  <li class="ui-state-default" value="07"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
-  <li class="ui-state-default fixed"></li>
+<li class="ui-state-default cancelled" style="height:1px;"></li>
+  <li class="ui-state-default" value="01"><span class="ui-icon ">Item 1</span><a id="music01"><audio controls></audio></a><button class="btn-vae">vae1</button></li>
+  <li class="ui-state-default" value="02"><span class="ui-icon ">Item 2</span><a id="music02"><audio controls></audio></a><button class="btn-vae">vae2</button></li>
+  <li class="ui-state-default" value="03"><span class="ui-icon ">Item 3</span><a id="music03"><audio controls></audio></a><button class="btn-vae">vae3</button></li>
+  <li class="ui-state-default" value="04"><span class="ui-icon ">Item 4</span><a id="music04"><audio controls></audio></a><button class="btn-vae">vae4</button></li>
+  <li class="ui-state-default" value="05"><span class="ui-icon ">Item 5</span><a id="music05"><audio controls></audio></a><button class="btn-vae">vae5</button></li>
+  <li class="ui-state-default" value="06"><span class="ui-icon ">Item 6</span><a id="music06"><audio controls></audio></a><button class="btn-vae">vae6</button></li>
+  <li class="ui-state-default" value="07"><span class="ui-icon ">Item 7</span><a id="music07"><audio controls></audio></a><button class="btn-vae">vae7</button></li>
+  <li class="ui-state-default cancelled" style="height:1px;"></li>
 </ul>
- 
+ <button>음악 재생</button>
  
 </body>
 </html>
