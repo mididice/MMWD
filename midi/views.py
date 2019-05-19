@@ -1,11 +1,17 @@
 from django.shortcuts import HttpResponse, render
-
+import numpy as np
+import json
 
 def index(request):
-    return render(request, 'midi/index.html')
+    midi_list = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P']
+    np.random.shuffle(midi_list)
+    json_list = json.dumps(midi_list)
+    return render(request, 'midi/index.html', {'json_list': midi_list})
 
 def music_vae(request):
     return HttpResponse("vae")
 
 def make_one(request):
-    return HttpResponse("음악이 완성되었습니다.")
+    result_list = request.GET.get("result_list")
+    print(result_list)
+    return HttpResponse("음악이 완성되었습니다.리스트:{}".format(result_list))
