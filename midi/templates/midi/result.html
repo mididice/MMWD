@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Sortable with midiDice</title>
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+  <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+  <style>
+  audio { width: 250px; }
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #sortable li { border:1px solid #000; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 54px; }
+  #sortable li span { margin-left: 1.3em; }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+	$(document).ready(function(){
+	var listLength = $('.ui-state-default').length;
+	$("#play").click(function (e) {
+		var seq = 0;
+	var interval = setInterval(function(){
+		$('.test'+seq).css({"background-color":"white"})
+		$('.test'+(seq+1)).css({"background-color":"yellow"});
+		seq++;
+	}, 2000);
+	});
+	});
+  </script>
+</head>
+<body>
+ <form id="midiForm" method="post">
+<ul id="sortable">
+    {% for midi in music_list %}
+     <li class="ui-state-default test1" id="{{midi}}"><span class="ui-icon ">Item {{midi}}</span><a id="music{{midi}}"></a></li>
+    {% endfor %}
+</ul>
+</form>
+<audio controls id="player">
+	<source src="{{music}}" type="audio/wav">
+</audio>
+<input type="hidden" id="tempList" val="A,B,C,D,E">
+<button id="play">음악 재생</button>
+
+</body>
+</html>

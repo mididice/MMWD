@@ -46,7 +46,7 @@
         console.log(premidi, nexmidi)
         $(this).parent().addClass('fixed');
         $(this).parent().next().addClass('fixed');
-        $(this).parent().after("<li class='ui-state-default fixed'>item"+premidi+"+"+nexmidi+"</li>").sortable();
+        $(this).parent().after("<li class='ui-state-default fixed data-value="+premidi+"_"+nexmidi+"'>item"+premidi+"_"+nexmidi+"</li>").sortable();
         $(this).remove();
         // $("#sortable").sortable('refresh');
         // alert('clicked')
@@ -64,15 +64,17 @@
     });
 
     $("#makeOne").click(function (e) {
-        //e.preventDefault();
+        e.preventDefault();
         var result_list = [];
         console.log($(this).attr("data-value"));
         $('.midi_music').each(function(){
             result_list.push($(this).attr("data-value"));
         });
-        $('#makeOneResult').val(result_list);
+        var url = result_list.join('-');
+        // $('#makeOneResult').val(result_list);
         console.log(result_list);
-        document.getElementById('makeOneForm').submit();
+        //document.getElementById('makeOneForm').submit();
+        location.href="music/"+url;
     });
   });
   </script>
