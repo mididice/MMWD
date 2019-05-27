@@ -1,4 +1,5 @@
 import wave
+import contextlib
 import os
 
 
@@ -11,3 +12,11 @@ def tidalwave(base_dir, infiles, outfile):
                 if not wav_out.getnframes():
                     wav_out.setparams(wav_in.getparams())
                 wav_out.writeframes(wav_in.readframes(wav_in.getnframes()))
+
+
+def durationwave(outfile):
+    with contextlib.closing(wave.open(outfile, 'r')) as f:
+        frames = f.getnframes()
+        rate = f.getframerate()
+        duration = frames / float(rate)
+    return duration

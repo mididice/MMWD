@@ -186,7 +186,7 @@
     $( "#sortable" ).disableSelection();
   } );
   var newlastwrap = function(premidi, nexmidi){
-    var result = '<li class="ui-state-default midi_music" data-value="' + nexmidi + '">' +
+    var result = '<li class="ui-state-default midi_music" data-music="' + nexmidi + '">' +
             '<a class="ui-num">1</a>' +
             '<div class="ui-label">' + nexmidi + '</div>' +
             '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add_new" data-value="'+ nexmidi +'" data-append="'+premidi+'_'+nexmidi+'"></div>' +
@@ -196,7 +196,7 @@
     return result;
   }
   var newnextwrap = function(premidi, nexmidi){
-    var result = '<li class="ui-state-default midi_music" data-value="' + nexmidi + '">' +
+    var result = '<li class="ui-state-default midi_music" data-music="' + nexmidi + '">' +
             '<a class="ui-num">1</a>' +
             '<div class="ui-label">' + nexmidi + '</div>' +
             '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add_new" data-value="'+ nexmidi +'" data-append="'+premidi+'_'+nexmidi+'"></div>' +
@@ -206,7 +206,7 @@
     return result;
   }
   var newintermidiwrap = function(premidi, nexmidi, ungroup_temp){
-    var result = "<li class='ui-state-default midi_music' data-value="+premidi+"_"+nexmidi+"'>"
+    var result = "<li class='ui-state-default midi_music' data-music="+premidi+"_"+nexmidi+"'>"
         +"<a class='ui-num'>1</a>"
         +"<div class='ui-label'>"+premidi+"+"+nexmidi+"</div>"
         +"<div class='btn_vae_delete' onclick='ungroup(" + ungroup_temp + ")'>X</div>"
@@ -309,10 +309,9 @@
         e.preventDefault();
         var result_list = [];
         $('.midi_music').each(function(){
-            result_list.push($(this).attr("data-value"));
+            result_list.push($(this).attr("data-music"));
         });
         var url = result_list.join('-');
-        console.log(result_list);
         location.href="music/"+url;
     });
   });
