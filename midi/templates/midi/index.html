@@ -5,8 +5,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MAKING MUSIC WITH DICE</title>
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-  <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
   <style>
   audio { display:none; }
   ul{width:100%;}
@@ -100,6 +98,12 @@
   height: 48px;
   object-fit: contain;
 }
+.ic_add_new{
+  cursor:pointer;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
 .btn_vae{
   width: 48px;
   margin-top: 20%;
@@ -155,9 +159,15 @@
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="{% static 'js/jquery.ui.touch-punch.min.js' %}" type></script>
   <script>
+    var order = [];
+   
   $( function() {
     $('.ui-label').filter(':last').next().children().hide();
+    $('.ui-label').each(function(){
+      order.push($(this).text());
+    });
     $( "#sortable" ).sortable({
       forceHelperSize: true,
       cancel: ".fixed, .cancelled",
@@ -165,92 +175,139 @@
       change: function(event, ui){
       },
       update: function(event, ui){
+        order = [];
         $('.ui-label').each(function(){
           $(this).next().children().show();
+          order.push($(this).text());
         });
         $('.ui-label').filter(':last').next().children().hide();
       }
     });
     $( "#sortable" ).disableSelection();
   } );
+  var newlastwrap = function(premidi, nexmidi){
+    var result = '<li class="ui-state-default midi_music" data-value="' + nexmidi + '">' +
+            '<a class="ui-num">1</a>' +
+            '<div class="ui-label">' + nexmidi + '</div>' +
+            '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add_new" data-value="'+ nexmidi +'" data-append="'+premidi+'_'+nexmidi+'"></div>' +
+            '<div class="left-item">' +
+            '<img src="{% static "ic-play.png" %}" srcset="{% static "ic-play@2x.png" %} 2x, {% static "ic-play@3x.png" %} 3x" class="ic_play" data-value="'+ nexmidi +'">' +
+            '<audio src="{% static "" %}wave/' + nexmidi + '.wav" class="audio_wave" type="audio/wav"></audio></div></li>';
+    return result;
+  }
+  var newnextwrap = function(premidi, nexmidi){
+    var result = '<li class="ui-state-default midi_music" data-value="' + nexmidi + '">' +
+            '<a class="ui-num">1</a>' +
+            '<div class="ui-label">' + nexmidi + '</div>' +
+            '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add_new" data-value="'+ nexmidi +'" data-append="'+premidi+'_'+nexmidi+'"></div>' +
+            '<div class="left-item">' +
+            '<img src="{% static "ic-play.png" %}" srcset="{% static "ic-play@2x.png" %} 2x, {% static "ic-play@3x.png" %} 3x" class="ic_play" data-value="'+ nexmidi +'">' +
+            '<audio src="{% static "" %}wave/' + nexmidi + '.wav" class="audio_wave" type="audio/wav"></audio></div></li>';
+    return result;
+  }
+  var newintermidiwrap = function(premidi, nexmidi, ungroup_temp){
+    var result = "<li class='ui-state-default midi_music' data-value="+premidi+"_"+nexmidi+"'>"
+        +"<a class='ui-num'>1</a>"
+        +"<div class='ui-label'>"+premidi+"+"+nexmidi+"</div>"
+        +"<div class='btn_vae_delete' onclick='ungroup(" + ungroup_temp + ")'>X</div>"
+        +"<div class='left-item'>"
+        +"<img src='{% static 'ic-play.png' %}' srcset='{% static 'ic-play@2x.png' %} 2x, {% static 'ic-play@3x.png' %} 3x' class='ic_play'></div></li>";
+    return result;
+  }
     $(document).on('click', '.ic_add', function(e) {
         // e.preventDefault();
         // var premidi = $(this).parent().parent().attr("data-value");
         // var nexmidi = $(this).parent().parent().next().attr("data-value");
-        var premidi = $(this).parents('ui-state-default').attr("data-value");
-        var nexmidi = $(this).parents('ui-state-default').next().attr("data-value");
+        var premidi = $(this).attr("data-value");
+        var premidi_index = order.findIndex(x=> x == premidi)
+        var nexmidi = order[premidi_index+1];
         console.log(premidi, nexmidi)
-        //$(this).parent().parent().addClass('fixed');
-        //$(this).parent().parent().next().addClass('fixed');
-        /*
-        $(this).parent().parent().after("<li class='ui-state-default' data-value="+premidi+"_"+nexmidi+"'>"
-        +"<a class='ui-num'>1</a>"
-        +"<div class='ui-label'>"+premidi+"+"+nexmidi+"</div>"
-            +"<div class='btn_vae_add'></div>"
-            +"<div class='left-item'>"
-            +"<img src='{% static 'ic-play.png' %}' srcset='img/ic-play@2x.png 2x,img/ic-play@3x.png 3x' class='ic_play'></div></li>"
-        ).sortable();
-        */
-        var prewrap = $(this).parent().parent().removeClass('target');
-        var nexwrap = $(this).parent().parent().next().removeClass('target');
-        var midiwrap = $("<div class='ui-state-default grouped_"+premidi +"' data-value="+premidi+"_"+nexmidi+"'/>");
-        $(this).parent().parent().after(midiwrap);
-        $(this).remove();
+        
         var ungroup_temp = '"' + premidi + '", "' + nexmidi + '"';
-        midiwrap.html(prewrap.clone().wrapAll('<div/>').parent().html() + "<li class='ui-state-default' data-value="+premidi+"_"+nexmidi+"'>"
-        +"<a class='ui-num'>1</a>"
-        +"<div class='ui-label'>"+premidi+"+"+nexmidi+"</div>"
-            +"<div class='btn_vae_delete' onclick='ungroup(" + ungroup_temp + ")'>X</div>"
-            +"<div class='left-item'>"
-            +"<img src='{% static 'ic-play.png' %}' srcset='img/ic-play@2x.png 2x,img/ic-play@3x.png 3x' class='ic_play'></div></li>" + nexwrap.clone().wrapAll('<div/>').parent().html());
-        prewrap.remove();
-        nexwrap.remove();
+        var intermidiwraphtml = newintermidiwrap(premidi, nexmidi, ungroup_temp);
+        var nextwraphtml = newnextwrap(premidi, nexmidi);
+        var preobject = $('*[data-music="'+premidi+'"]');
+        var nexobject = $('*[data-music="'+nexmidi+'"]');
+        var prewrap = preobject.removeClass('target');
+        var nexwrap = nexobject.removeClass('target');
+        // var prewrap = $(this).parent().parent().removeClass('target');
+        // var nexwrap = $(this).parent().parent().next().removeClass('target');
+        var midiwrap = $("<div class='ui-state-default midigroup grouped_"+premidi +"' data-taeho='"+premidi+"_"+nexmidi+"'/>");
+        // preobject.after(midiwrap);
+        $(this).remove();
+        if(preobject.next().hasClass('midigroup')){
+          console.log('true')
+          // midiwrap.html(prewrap.clone().wrapAll('<div/>').parent().html() + intermidiwraphtml)
+          // var nextslicewrap = preobject.next().slice(0);
+          // midiwrap.append(nextslicewrap);
+          preobject.next().prepend(prewrap.clone().wrapAll('<li/>').parent().html() + intermidiwraphtml)
+        }else{
+          console.log('false');
+          midiwrap.html(prewrap.clone().wrapAll('<div/>').parent().html() + intermidiwraphtml + nextwraphtml);
+          nexobject.remove();
+          preobject.after(midiwrap);
+        }        
+        // $(this).parent().parent().after(midiwrap);
+        // + newnextwrap.wrapAll('<div/>').parent().html());
+        preobject.remove();
         midiwrap.addClass('target')
-
+        $('.ui-label').filter(':last').next().children().hide();
+  });
+  $(document).on('click', '.ic_add_new', function(){
+    var premidi = $(this).attr("data-value");
+    var premidi_index = order.findIndex(x=> x == premidi)
+    var nexmidi = order[premidi_index+1];
+    var ungroup_temp = '"' + premidi + '", "' + nexmidi + '"';
+    console.log(premidi, nexmidi)
+    var wrapvalue = $(this).attr("data-append");
+    var wrapobject = $("div").find('*[data-taeho="'+wrapvalue+'"]');
+    if(wrapobject.next().hasClass('midigroup')){
+      console.log('true');
+      wrapobject.append(newintermidiwrap(premidi, nexmidi, ungroup_temp));
+      wrapobject.append(wrapobject.next().children());
+      wrapobject.next().remove();
+    }else{
+      console.log('false');
+      wrapobject.append(newintermidiwrap(premidi, nexmidi, ungroup_temp));
+      wrapobject.append(newnextwrap(premidi, nexmidi));
+      wrapobject.next().remove();
+    }
+    wrapobject.attr('data-taeho', premidi+"_"+nexmidi);
+    $(this).remove();
+    $('.ui-label').filter(':last').next().children().hide();
   });
   
   var ungroup = function(pre, next){
-          var group = $('.grouped_' + pre)[0];
-          var prewrap = '<li class="ui-state-default target midi_music" data-value="' + pre + '">' +
-            '<a class="ui-num">1</a>' +
-            '<div class="ui-label">' + pre + '</div>' +
-            '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="img/ic-add@2x.png 2x,img/ic-add@3x.png 3x" class="ic_add"></div>' +
-            '<div class="left-item">' +
-              '<img src="{% static "ic-play.png" %}" srcset="img/ic-play@2x.png 2x,img/ic-play@3x.png 3x"" class="ic_play" data-value="'+ pre +'">' +
-              '<audio src="{% static "" %}wave/' + pre + '.wav" class="audio_wave" type="audio/wav"></audio></div></li>';
-              var nextwrap = '<li class="ui-state-default target midi_music" data-value="' + next + '">' +
-            '<a class="ui-num">1</a>' +
-            '<div class="ui-label">' + next + '</div>' +
-            '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="img/ic-add@2x.png 2x,img/ic-add@3x.png 3x" class="ic_add"></div>' +
-            '<div class="left-item">' +
-              '<img src="{% static "ic-play.png" %}" srcset="img/ic-play@2x.png 2x,img/ic-play@3x.png 3x"" class="ic_play" data-value="'+ next +'">' +
-              '<audio src="{% static "" %}wave/' + next + '.wav" class="audio_wave" type="audio/wav"></audio></div></li>';
-          group.outerHTML = prewrap + nextwrap;
-        }
+    var group = $('.grouped_' + pre)[0];
+    var prewrap = '<li class="ui-state-default target midi_music" data-music="' + pre + '">' +
+      '<a class="ui-num">1</a>' +
+      '<div class="ui-label">' + pre + '</div>' +
+      '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add" data-value="'+ pre +'"></div>' +
+      '<div class="left-item">' +
+      '<img src="{% static "ic-play.png" %}" srcset="{% static "ic-play@2x.png" %} 2x, {% static "ic-play@3x.png" %} 3x" class="ic_play" data-value="'+ pre +'">' +
+      '<audio src="{% static "" %}wave/' + pre + '.wav" class="audio_wave" type="audio/wav"></audio></div></li>';
+    var nextwrap = '<li class="ui-state-default target midi_music" data-music="' + next + '">' +
+      '<a class="ui-num">1</a>' +
+      '<div class="ui-label">' + next + '</div>' +
+      '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add" data-value="'+ next +'"></div>' +
+      '<div class="left-item">' +
+      '<img src="{% static "ic-play.png" %}" srcset="{% static "ic-play@2x.png" %} 2x, {% static "ic-play@3x.png" %} 3x" class="ic_play" data-value="'+ next +'">' +
+      '<audio src="{% static "" %}wave/' + next + '.wav" class="audio_wave" type="audio/wav"></audio></div></li>';
+      group.outerHTML = prewrap + nextwrap;
+  }
         
   $(document).ready(function(){
-    // var lilength = $('.ui-state-default').length;
-    // var second = 0*1;
-    // var delay = (1/lilength)*1;
-
-    // $('.ui-state-default').each(function(){
-    //   //second = (delay + second).toFixed(1)*1;
-    //   // $(this).css({
-    //   //   "animation": "animation 0.5s cubic-bezier(0.71, 0.5, 0.69, 1.4) backwards",
-    //   //   "animation-delay": second+"s"});
-    // });
-    var audio = new Audio('/totalworkshop/static/wave/A.wav');
+    var audio = new Audio('/MMWD/static/wave/A.wav');
       $('.ic_play').click(function(){
         var filename = $(this).attr("data-value");
         audio.pause();
-        audio = new Audio('/totalworkshop/static/wave/'+filename+'.wav');
+        audio = new Audio('/MMWD/static/wave/'+filename+'.wav');
         audio.play();
 
       });
     $("#makeOne").click(function (e) {
         e.preventDefault();
         var result_list = [];
-        console.log($(this).attr("data-value"));
         $('.midi_music').each(function(){
             result_list.push($(this).attr("data-value"));
         });
@@ -268,21 +325,19 @@
         <p class="making_music_with">MAKING MUSIC WITH DICE</p>
       </div>
       <ul class="rectangle_sortable" id="sortable">
-          <!-- <li class="ui-state-default cancelled" style="height:1px;"></li> -->
          {% for midi in json_list %}
-          <li class="ui-state-default target midi_music" data-value="{{ midi }}">
+          <li class="ui-state-default target midi_music" data-music="{{ midi }}">
             <a class="ui-num">1</a>  
             <div class="ui-label">{{ midi }}</div>
             <div class="btn_vae">
-                <img src="{% static "ic-add.png" %}" srcset="img/ic-add@2x.png 2x,img/ic-add@3x.png 3x" class="ic_add">
+                <img src="{% static "ic-add.png" %}" srcset="{% static 'ic-add@2x.png' %} 2x, {% static 'ic-add@3x.png' %} 3x" class="ic_add" data-value="{{ midi }}">
             </div>
             <div class="left-item">
-              <img src="{% static "ic-play.png" %}" srcset="img/ic-play@2x.png 2x,img/ic-play@3x.png 3x"" class="ic_play" data-value="{{ midi }}">
+              <img src="{% static "ic-play.png" %}" srcset="{% static 'ic-play@2x.png' %} 2x, {% static 'ic-play@3x.png' %} 3x" class="ic_play" data-value="{{ midi }}">
               <audio src="{% static "" %}wave/{{midi}}.wav" class="audio_wave" type="audio/wav"></audio>
             </div>
           </li>
          {% endfor %}
-          <!-- <li class="ui-state-default cancelled" style="height:1px;"></li> -->
      </ul>
       <form id="makeOneForm" action="music">
           <input type="hidden" id="makeOneResult" name="result_list">
