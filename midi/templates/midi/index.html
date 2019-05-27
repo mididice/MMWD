@@ -1,98 +1,296 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Sortable with midiDice</title>
+  <title>MAKING MUSIC WITH DICE</title>
   <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
   <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
   <style>
-  audio { width: 250px; }
-  #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-  #sortable li { border:1px solid #000; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 54px; }
-  #sortable li span { margin-left: 1.3em; }
-  /*@keyframes animation { 0% { opacity: 0;
-    transform: translate3d(0, 100px, 0) scale(0.9); } 100% { opacity: 1; transform: none; } }
-  ul { padding-top: 50px; font-size: 0; }
-  ul li { height: 50px; background:  #ffff80; }*/
-  /*ul li:nth-child(2) { animation: animation 0.5s cubic-bezier(0.71, 0.5, 0.69, 1.4) backwards; animation-delay: 0.2s; }
-  ul li:nth-child(3) { animation: animation 0.5s cubic-bezier(0.71, 0.5, 0.69, 1.4) backwards; animation-delay: 0.4s; }*/
-  /*ul li:nth-child(4) { animation: animation 0.5s cubic-bezier(0.71, 0.5, 0.69, 1.4) backwards; animation-delay: 0.6s; }*/*/
+  audio { display:none; }
+  ul{width:100%;}
+  .container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .rectangle_top {
+  width: 360px;
+  height: 42px;
+  background-color: #242424;
+  position: fixed;
+  top:0;
+  
+  }
+  .making_music_with {
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  padding-left: 4%;
+  }
+  .samdasu{
+    min-height: 740px;
+    background-image: linear-gradient(to bottom, #e26e83, #7379d4);
+  }
+  .rectangle_sortable{
+    list-style-type: none; margin: 0; padding: 0; 
+    padding-top: 30px;
+    padding-bottom: 48px;
+  }
+  .rectangle_sortable li {
+  width: 360px;
+  height:72px;
+  max-height: 72px;
+  border: solid 1px #ffffff;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  } 
+  .ui-label { 
+    display:inline-block;
+    margin-left: 16px;
+  font-family: Roboto;
+  font-size: 28px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  min-width:27px;
+  }
+  .ui-num{
+    display:inline-block;
+  width: 7px;
+  height: 14px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  margin-left: 16px;
+  }
+  .left-item{
+    display:inline-block;
+   margin-top: 0;
+   margin-bottom : 0;
+   margin-left:110px;
+  }
+  .ic_play {
+    cursor:pointer;
+    display:inline-block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+.ic_add {
+  cursor:pointer;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+.btn_vae{
+  width: 48px;
+  margin-top: 20%;
+  margin-left: 24%;
+}
+.btn_vae_add{
+  width: 14px;
+  margin-top: 20%;
+  margin-left: 24%;
+}
+  .rectangle_bottom {
+    cursor: pointer;
+  height: 60px;
+  background-color: #242424;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  max-width: 360px;
+  }
+  .selection_complete{
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+
+@media (min-width: 1200px){
+.container {
+    max-width: 360px;
+}
+}
+@media (min-width: 992px){
+.container {
+    max-width: 360px;
+}
+}
+@media (min-width: 768px){
+.container {
+    max-width: 360px;
+}
+}
+@media (min-width: 576px){
+.container {
+    max-width: 360px;
+}
+}
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
+    $('.ui-label').filter(':last').next().children().hide();
     $( "#sortable" ).sortable({
-    // items: '.ui-state-default:not(.fixed)'
       forceHelperSize: true,
       cancel: ".fixed, .cancelled",
-      items: '.ui-state-default:not(.fixed)',
+      items: '.ui-state-default.target',
       change: function(event, ui){
       },
       update: function(event, ui){
-        $('.ui-icon').each(function(){
-          $(this).next().next().attr("disabled", false);
+        $('.ui-label').each(function(){
+          $(this).next().children().show();
         });
-        $('.ui-icon').filter(':last').next().next().attr("disabled", true);
+        $('.ui-label').filter(':last').next().children().hide();
       }
     });
     $( "#sortable" ).disableSelection();
   } );
-    $(document).on('click', '.btn-vae', function(e) {
+    $(document).on('click', '.ic_add', function(e) {
         // e.preventDefault();
-        var premidi = $(this).parent().val();
-        var nexmidi = $(this).parent().next().val();
+        // var premidi = $(this).parent().parent().attr("data-value");
+        // var nexmidi = $(this).parent().parent().next().attr("data-value");
+        var premidi = $(this).parents('ui-state-default').attr("data-value");
+        var nexmidi = $(this).parents('ui-state-default').next().attr("data-value");
         console.log(premidi, nexmidi)
-        $(this).parent().addClass('fixed');
-        $(this).parent().next().addClass('fixed');
-        $(this).parent().after("<li class='ui-state-default midi_music fixed'>item"+premidi+"+"+nexmidi+" data-value="+premidi+"_"+nexmidi+"</li>").sortable();
+        //$(this).parent().parent().addClass('fixed');
+        //$(this).parent().parent().next().addClass('fixed');
+        /*
+        $(this).parent().parent().after("<li class='ui-state-default' data-value="+premidi+"_"+nexmidi+"'>"
+        +"<a class='ui-num'>1</a>"
+        +"<div class='ui-label'>"+premidi+"+"+nexmidi+"</div>"
+            +"<div class='btn_vae_add'></div>"
+            +"<div class='left-item'>"
+            +"<img src='{% static 'ic-play.png' %}' srcset='img/ic-play@2x.png 2x,img/ic-play@3x.png 3x' class='ic_play'></div></li>"
+        ).sortable();
+        */
+        var prewrap = $(this).parent().parent().removeClass('target');
+        var nexwrap = $(this).parent().parent().next().removeClass('target');
+        var midiwrap = $("<div class='ui-state-default grouped_"+premidi +"' data-value="+premidi+"_"+nexmidi+"'/>");
+        $(this).parent().parent().after(midiwrap);
         $(this).remove();
-        // $("#sortable").sortable('refresh');
-        // alert('clicked')
+        var ungroup_temp = '"' + premidi + '", "' + nexmidi + '"';
+        midiwrap.html(prewrap.clone().wrapAll('<div/>').parent().html() + "<li class='ui-state-default' data-value="+premidi+"_"+nexmidi+"'>"
+        +"<a class='ui-num'>1</a>"
+        +"<div class='ui-label'>"+premidi+"+"+nexmidi+"</div>"
+            +"<div class='btn_vae_delete' onclick='ungroup(" + ungroup_temp + ")'>X</div>"
+            +"<div class='left-item'>"
+            +"<img src='{% static 'ic-play.png' %}' srcset='img/ic-play@2x.png 2x,img/ic-play@3x.png 3x' class='ic_play'></div></li>" + nexwrap.clone().wrapAll('<div/>').parent().html());
+        prewrap.remove();
+        nexwrap.remove();
+        midiwrap.addClass('target')
+
   });
+  
+  var ungroup = function(pre, next){
+          var group = $('.grouped_' + pre)[0];
+          var prewrap = '<li class="ui-state-default target midi_music" data-value="' + pre + '">' +
+            '<a class="ui-num">1</a>' +
+            '<div class="ui-label">' + pre + '</div>' +
+            '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="img/ic-add@2x.png 2x,img/ic-add@3x.png 3x" class="ic_add"></div>' +
+            '<div class="left-item">' +
+              '<img src="{% static "ic-play.png" %}" srcset="img/ic-play@2x.png 2x,img/ic-play@3x.png 3x"" class="ic_play" data-value="'+ pre +'">' +
+              '<audio src="{% static "" %}wave/' + pre + '.wav" class="audio_wave" type="audio/wav"></audio></div></li>';
+              var nextwrap = '<li class="ui-state-default target midi_music" data-value="' + next + '">' +
+            '<a class="ui-num">1</a>' +
+            '<div class="ui-label">' + next + '</div>' +
+            '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="img/ic-add@2x.png 2x,img/ic-add@3x.png 3x" class="ic_add"></div>' +
+            '<div class="left-item">' +
+              '<img src="{% static "ic-play.png" %}" srcset="img/ic-play@2x.png 2x,img/ic-play@3x.png 3x"" class="ic_play" data-value="'+ next +'">' +
+              '<audio src="{% static "" %}wave/' + next + '.wav" class="audio_wave" type="audio/wav"></audio></div></li>';
+          group.outerHTML = prewrap + nextwrap;
+        }
+        
   $(document).ready(function(){
-    var lilength = $('.ui-state-default').length;
-    var second = 0*1;
-    var delay = (1/lilength)*1;
+    // var lilength = $('.ui-state-default').length;
+    // var second = 0*1;
+    // var delay = (1/lilength)*1;
 
-    $('.ui-state-default').each(function(){
-      second = (delay + second).toFixed(1)*1;
-      $(this).css({
-        "animation": "animation 0.5s cubic-bezier(0.71, 0.5, 0.69, 1.4) backwards",
-        "animation-delay": second+"s"});
-    });
+    // $('.ui-state-default').each(function(){
+    //   //second = (delay + second).toFixed(1)*1;
+    //   // $(this).css({
+    //   //   "animation": "animation 0.5s cubic-bezier(0.71, 0.5, 0.69, 1.4) backwards",
+    //   //   "animation-delay": second+"s"});
+    // });
+    var audio = new Audio('/totalworkshop/static/wave/A.wav');
+      $('.ic_play').click(function(){
+        var filename = $(this).attr("data-value");
+        audio.pause();
+        audio = new Audio('/totalworkshop/static/wave/'+filename+'.wav');
+        audio.play();
 
+      });
     $("#makeOne").click(function (e) {
-        //e.preventDefault();
+        e.preventDefault();
         var result_list = [];
         console.log($(this).attr("data-value"));
         $('.midi_music').each(function(){
             result_list.push($(this).attr("data-value"));
         });
-        result_list = result_list.join('-');
-        $('#makeOneResult').val(result_list);
+        var url = result_list.join('-');
         console.log(result_list);
-        document.getElementById('makeOneForm').submit();
-        //window.location.href = "music/~";
-
+        location.href="music/"+url;
     });
   });
   </script>
 </head>
 <body>
- <button class="btn">추가하기</button>
- <ul id="sortable">
-     <li class="ui-state-default cancelled" style="height:1px;"></li>
-    {% for midi in json_list %}
-     <li class="ui-state-default midi_music" data-value="{{ midi }}"><span class="ui-icon ">{{ midi }}</span><a id="music01"><audio controls></audio></a><button class="btn-vae">vae1</button></li>
-    {% endfor %}
-     <li class="ui-state-default cancelled" style="height:1px;"></li>
-</ul>
- <form id="makeOneForm" action="music">
-     <input type="hidden" id="makeOneResult" name="result_list">
- <button id="makeOne">음악 합치기</button>
- </form>
-
+  <div class="container">
+    <div class="samdasu">
+      <div class="rectangle_top">
+        <p class="making_music_with">MAKING MUSIC WITH DICE</p>
+      </div>
+      <ul class="rectangle_sortable" id="sortable">
+          <!-- <li class="ui-state-default cancelled" style="height:1px;"></li> -->
+         {% for midi in json_list %}
+          <li class="ui-state-default target midi_music" data-value="{{ midi }}">
+            <a class="ui-num">1</a>  
+            <div class="ui-label">{{ midi }}</div>
+            <div class="btn_vae">
+                <img src="{% static "ic-add.png" %}" srcset="img/ic-add@2x.png 2x,img/ic-add@3x.png 3x" class="ic_add">
+            </div>
+            <div class="left-item">
+              <img src="{% static "ic-play.png" %}" srcset="img/ic-play@2x.png 2x,img/ic-play@3x.png 3x"" class="ic_play" data-value="{{ midi }}">
+              <audio src="{% static "" %}wave/{{midi}}.wav" class="audio_wave" type="audio/wav"></audio>
+            </div>
+          </li>
+         {% endfor %}
+          <!-- <li class="ui-state-default cancelled" style="height:1px;"></li> -->
+     </ul>
+      <form id="makeOneForm" action="music">
+          <input type="hidden" id="makeOneResult" name="result_list">
+      </form> 
+      <div class="rectangle_bottom" id="makeOne">
+        <p class="selection_complete">SELECTION COMPLETE</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
