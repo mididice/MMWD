@@ -46,7 +46,7 @@
         console.log(premidi, nexmidi)
         $(this).parent().addClass('fixed');
         $(this).parent().next().addClass('fixed');
-        $(this).parent().after("<li class='ui-state-default fixed'>item"+premidi+"+"+nexmidi+"</li>").sortable();
+        $(this).parent().after("<li class='ui-state-default midi_music fixed'>item"+premidi+"+"+nexmidi+" data-value="+premidi+"_"+nexmidi+"</li>").sortable();
         $(this).remove();
         // $("#sortable").sortable('refresh');
         // alert('clicked')
@@ -70,9 +70,12 @@
         $('.midi_music').each(function(){
             result_list.push($(this).attr("data-value"));
         });
+        result_list = result_list.join('-');
         $('#makeOneResult').val(result_list);
         console.log(result_list);
         document.getElementById('makeOneForm').submit();
+        //window.location.href = "music/~";
+
     });
   });
   </script>
