@@ -9,27 +9,28 @@ margin-right: auto;
 margin-left: auto;
 }
 .rectangle_top {
+background-color: #c95466;
 width: 360px;
-height: 42px;
-background-color: #242424;
+height: 100px;
 position: fixed;
 top:0;
 }
 .making_music_with {
 display:inline-block;
 font-family: Roboto;
-font-size: 12px;
-font-weight: 500;
+font-size: 23px;
+font-weight: bold;
 font-style: normal;
 font-stretch: normal;
 line-height: normal;
 letter-spacing: normal;
 color: #ffffff;
-padding-left: 4%;
+padding: 4%;
+margin: 0;
 }
 .reset{
-display:inline-block;
-margin-left:38%;
+display: inline-block;
+margin-left: 48%;
 }
 .reset > a{
 font-family: Roboto;
@@ -44,34 +45,32 @@ text-decoration: none;
 }
 .samdasu{
 min-height: 740px;
-background-image: linear-gradient(to bottom, #e26e83, #7379d4);
+background-image: linear-gradient(to bottom, #c95466, #7379d4 99%);
 }
 .rectangle_sortable{
 list-style-type: none; margin: 0; padding: 0; 
-padding-top: 30px;
-padding-bottom: 48px;
+padding-top: 102px;
+padding-bottom: 60px;
 }
 .rectangle_sortable li {
-width: 360px;
-height:72px;
-max-height: 72px;
-border: solid 1px #ffffff;
-background-color: rgba(255, 255, 255, 0.2);
+width: 358px;
+height: 58px;
+max-height: 58px;
+border-radius: 26.5px;
+border: solid 1px #cacaca;
+background-color: #ffffff;
 display: flex;
 align-items: center;
+margin: 4px 0 4px 0;
 } 
+.rectangle-vae{
+  border: solid 1px #cacaca!important;
+  background-color: rgba(255, 255, 255, 0.6)!important;
+}
 .ui-label { 
 display:inline-block;
-margin-left: 16px;
-font-family: Roboto;
-font-size: 28px;
-font-weight: bold;
-font-style: normal;
-font-stretch: normal;
-line-height: normal;
-letter-spacing: normal;
-color: #ffffff;
-min-width:27px;
+margin-left: 6px;
+margin-top: 4px;
 }
 .ui-num{
 display:inline-block;
@@ -87,11 +86,37 @@ letter-spacing: normal;
 color: #ffffff;
 margin-left: 16px;
 }
+.ui-name{
+  width: 14px;
+  height: 24px;
+  min-width: 100px;
+  margin-left:8px;
+}
+.ui-name > span{
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #2f2f2f;
+}
 .left-item{
 display:inline-block;
-margin-top: 0;
- margin-bottom : 0;
- margin-left:110px;
+margin-top: 2px;
+margin-bottom : 0;
+margin-left:128px;
+}
+.is_reset{
+  width: 54px;
+  height: 20px;
+  object-fit: contain;
+}
+.ic_circle{
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
 }
 .ic_play {
 cursor:pointer;
@@ -102,20 +127,20 @@ object-fit: contain;
 }
 .ic_add {
 cursor:pointer;
-width: 48px;
-height: 48px;
+width: 26px;
+height: 26px;
 object-fit: contain;
 }
 .ic_add_new{
 cursor:pointer;
-width: 48px;
-height: 48px;
+width: 26px;
+height: 26px;
 object-fit: contain;
 }
 .btn_vae{
-width: 48px;
+width: 26px;
 margin-top: 20%;
-margin-left: 24%;
+margin-left: 2%;
 }
 .btn_vae_add{
 width: 14px;
@@ -129,7 +154,6 @@ margin-left: 16%;
 .rectangle_bottom {
 cursor: pointer;
 height: 60px;
-background-color: #242424;
 position: fixed;
 bottom: 0;
 width: 100%;
