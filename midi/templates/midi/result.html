@@ -12,17 +12,26 @@
   <div class="container">
     <div class="samdasu">
       <div class="rectangle_top">
-        <p class="making_music_with">MAKING MUSIC WITH DICE</p>
+        <p class="making_music_with">MMWD</p>
+        <span class="reset">
+          <a href="/MMWD">
+            <img src="{% static 'ic-reset.png' %}" srcset="{% static 'ic-reset@2x.png' %} 2x, {% static 'ic-reset@3x.png' %} 3x" alt="reset">
+          </a>
+        </span>
       </div>
       <ul class="rectangle_sortable">
         {% for midi in music_list %}
         <li class="ui-state-default midi_music{{forloop.counter}}" data-value="{{ midi }}">
-          <a class="ui-num">{{forloop.counter}}</a>
-          <div class="ui-label">{{ midi }}</div>
+          <div class="ui-label" data-label={{midi}}>
+            <img src="{% static '' %}{{ midi }}.png" srcset="{% static '' %}{{ midi }}@2x.png 2x, {% static '' %}{{ midi }}@3x.png 3x" class="ic_circle">
+          </div>
+          <div class="ui-name">
+            <span>{{midi}}</span>
+          </div>
         </li>
         {% endfor %}
       </ul>
-      <div class="rectangle_bottom_result" id="playOne">
+      <div class="rectangle_bottom_result">
         <img src="{% static 'ic-play.png' %}" srcset="{% static 'ic-play@2x.png' %} 2x, {% static 'ic-play@3x.png' %} 3x"
           class="ic_play_result" data-value="{{ midi }}" id="play">
         <audio id="theMusic" ontimeupdate="move(this)" type="audio/wav">
@@ -84,8 +93,8 @@
         $(this).removeClass('moment');
       });
       $('.midi_music' + (t)).addClass('moment');
-      var moment = document.getElementsByClassName('moment')[0];
-      window.scrollTo(0, moment.offsetTop-40);
+      // var moment = document.getElementsByClassName('moment')[0];
+      // window.scrollTo(0, moment.offsetTop-40);
     }
   </script>
 </body>

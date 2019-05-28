@@ -178,6 +178,7 @@ color: #ffffff;
   bottom: 0;
   width: 100%;
   max-width: 360px;
+  border-radius: 22px 22px 0px 0px;  
   }
   .ic_play_result{
   display: inline-block;
@@ -193,6 +194,9 @@ color: #ffffff;
   .moment{
   background-color: rgba(36, 36, 36, 0.8)!important;
   overflow: auto;
+  }
+  .moment > div > span{
+    color:#ffffff!important;
   }
   #myProgress {
   margin:20px 0 20px 0;
