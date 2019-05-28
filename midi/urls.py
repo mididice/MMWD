@@ -8,5 +8,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('vae', views.index, name='vae'),
     path('music/<slug:slug>/', views.make_one, name='one'),
+    path('save/<slug:slug>/', views.download, name='download'),
+
 ]
 
