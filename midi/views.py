@@ -23,6 +23,8 @@ def make_one(request, slug):
     filename = ''.join(slug)+".wav"
     outfile = os.path.join(result_dir, filename)
     result_list = slug.split('-')
+    if not os.path.isdir(result_dir):
+        os.mkdir(result_dir)
     if not os.path.isfile(outfile):
         combine.tidalwave(basic_dir, result_list, outfile)
     return render(request, 'midi/result.html',

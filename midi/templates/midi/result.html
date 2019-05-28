@@ -5,336 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MAKING MUSIC WITH DICE</title>
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-  <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
-  <style>
-  audio { display:none; }
-  ul{width:100%;}
-  .container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  .rectangle_top {
-  width: 360px;
-  height: 42px;
-  background-color: #242424;
-  position: fixed;
-  top:0;
-  
-  }
-  .making_music_with {
-  font-family: Roboto;
-  font-size: 12px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ffffff;
-  padding-left: 4%;
-  }
-  .samdasu{
-    min-height: 740px;
-    background-image: linear-gradient(to bottom, #e26e83, #7379d4);
-  }
-  .rectangle_sortable{
-    list-style-type: none; margin: 0; padding: 0; 
-    padding-top: 30px;
-    padding-bottom: 48px;
-  }
-  .rectangle_sortable li {
-  width: 360px;
-  height:72px;
-  max-height: 72px;
-  border: solid 1px #ffffff;
-  background-color: rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  } 
-  .ui-label { 
-    display:inline-block;
-    margin-left: 16px;
-  font-family: Roboto;
-  font-size: 28px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ffffff;
-  min-width:27px;
-  }
-  .ui-num{
-    display:inline-block;
-  width: 7px;
-  height: 14px;
-  font-family: Roboto;
-  font-size: 12px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ffffff;
-  margin-left: 16px;
-  }
-  .left-item{
-    display:inline-block;
-   margin-top: 0;
-   margin-bottom : 0;
-   margin-left:110px;
-  }
-  .ic_play {
-    cursor:pointer;
-    display:inline-block;
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-.ic_add {
-  cursor:pointer;
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-}
-.btn_vae{
-  width: 48px;
-  margin-top: 20%;
-  margin-left: 24%;
-}
-.btn_vae_add{
-  width: 14px;
-  margin-top: 20%;
-  margin-left: 24%;
-}
-  .rectangle_bottom {
-    cursor: pointer;
-  height: 60px;
-  background-color: #242424;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  max-width: 360px;
-  }
-  .rectangle_bottom_result {
-    cursor: pointer;
-  height: 60px;
-  background-color: #242424;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  max-width: 360px;
-  }
-  .selection_complete{
-  font-family: Roboto;
-  font-size: 16px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ffffff;
-}
-.ic_play_result{
-  display: inline-block;
-  align-items: center;
-  padding:16px;
-}
-.ic_download_result{
-  display: inline-block;
-  align-items: center;
-  margin-left: 8%;
-  padding: 24px;
-}
-#myProgress {
-  margin:20px 0 20px 0;
-  display:inline-block;
-  width: 54%;
-  background-color: rgba(255, 255, 255, 0.4);;
-}
-
-#myBar {
-  width: 1%;
-  height: 2.5px;
-  background-color: rgba(255, 255, 255, 0.6);;
-}
-
-@media (min-width: 1200px){
-.container {
-    max-width: 360px;
-}
-}
-@media (min-width: 992px){
-.container {
-    max-width: 360px;
-}
-}
-@media (min-width: 768px){
-.container {
-    max-width: 360px;
-}
-}
-@media (min-width: 576px){
-.container {
-    max-width: 360px;
-}
-}
-  </style>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $(document).ready(function(){
-    // var x = document.getElementById('theMusic');
-    // $('.ic_play_result').click(function(){
-    //   x.pause();
-    //   x.play();
-    // });
-  var listLength = $('.ui-state-default').length;
-  // $("#play").click(function (e) {
-  //   var song = document.getElementById("theMusic");
-  //     if(song.paused){
-  //       song.play();
-  //       $(this).attr("src", "{% static 'ic-pause.png' %}");
-  //       $(this).attr("srcset", "{% static 'ic-pause@2x.png' %} 2x,{% static 'ic-pause@3x.png' %} 3x ");
-  //     }else{
-  //       song.pause();
-  //       $(this).attr("src", "{% static 'ic-play.png' %}");
-  //       $(this).attr("srcset", "{% static 'ic-play@2x.png' %} 2x,{% static 'ic-play@3x.png' %} 3x ");
-  //     }
-    
-  //   var duration = $('#duration').val();
-  //   var sec = duration/listLength*1000
-  //   console.log(sec);
-  //   var seq = 0;
-  //   var color = $('.midi_music1').css( "background-color" );
-  //   var interval = setInterval(function(){
-  //   color = $('.midi_music'+(seq+1)).css( "background-color" );
-  //   $('.midi_music'+seq).css({"background-color": color});
-  //   $('.midi_music'+(seq+1)).css({"background-color": "rgba(36, 36, 36, 0.8)"});
-  //   seq++;
-  // }, sec);
-  // });
-
-  });
-  var duration = 0;
-  $(document).on('click', '#play', function(){
-    var song = document.getElementById("theMusic");
-    duration = song.duration;
-    if(song.paused){
-      song.play();
-      $(this).attr("src", "{% static 'ic-pause.png' %}");
-      $(this).attr("srcset", "{% static 'ic-pause@2x.png' %} 2x,{% static 'ic-pause@3x.png' %} 3x ");
-    }else{
-      song.pause();
-      $(this).attr("src", "{% static 'ic-play.png' %}");
-      $(this).attr("srcset", "{% static 'ic-play@2x.png' %} 2x,{% static 'ic-play@3x.png' %} 3x ");
-    }
-  });
-  function move(event) {
-    var elem = document.getElementById("myBar"); 
-    var time = event.currentTime;
-    var width = time/duration*100;
-    if (width >= 100) {
-      $('.ic_play_result').attr("src", "{% static 'ic-play.png' %}");
-      $('.ic_play_result').attr("srcset", "{% static 'ic-play@2x.png' %} 2x,{% static 'ic-play@3x.png' %} 3x ");
-    } else {
-      elem.style.width = width + '%'; 
-    }
-  
-}
-//   function initProgressBar() {
-//   var player = document.getElementById('theMusic');
-//   var length = player.duration
-//   var current_time = player.currentTime;
-
-//   // calculate total length of value
-//   var totalLength = calculateTotalValue(length); //totalLength
-
-//   // calculate current value time
-//   var currentTime = calculateCurrentValue(current_time);
-//   // document.getElementById("start-time").innerHTML = currentTime;
-
-//   var progressbar = document.getElementById('seek-obj');
-//   progressbar.value = (player.currentTime / player.duration);
-//   progressbar.addEventListener("click", seek);
-
-//   // if (player.currentTime == player.duration) {
-//   //   document.getElementById('play-btn').className = "";
-//   // }
-
-//   function seek(event) {
-//     var percent = event.offsetX / this.offsetWidth;
-//     player.currentTime = percent * player.duration;
-//     progressbar.value = percent / 100;
-//   }
-// };
-
-// function initPlayers(num) {
-//   // pass num in if there are multiple audio players e.g 'player' + i
-
-//   for (var i = 0; i < num; i++) {
-//     (function() {
-
-//       // Variables
-//       // ----------------------------------------------------------
-//       // audio embed object
-//       var playerContainer = document.getElementById('player-container'),
-//         player = document.getElementById('player'),
-//         isPlaying = false,
-//         playBtn = document.getElementById('play-btn');
-
-//       // Controls Listeners
-//       // ----------------------------------------------------------
-//       if (playBtn != null) {
-//         playBtn.addEventListener('click', function() {
-//           togglePlay()
-//         });
-//       }
-
-//       // Controls & Sounds Methods
-//       // ----------------------------------------------------------
-//       function togglePlay() {
-//         if (player.paused === false) {
-//           player.pause();
-//           isPlaying = false;
-//           document.getElementById('play-btn').className = "";
-
-//         } else {
-//           player.play();
-//           document.getElementById('play-btn').className = "pause";
-//           isPlaying = true;
-//         }
-//       }
-//     }());
-//   }
-// }
-
-// function calculateTotalValue(length) {
-//   var minutes = Math.floor(length / 60),
-//     seconds_int = length - minutes * 60,
-//     seconds_str = seconds_int.toString(),
-//     seconds = seconds_str.substr(0, 2),
-//     time = minutes + ':' + seconds
-
-//   return time;
-// }
-
-// function calculateCurrentValue(currentTime) {
-//   var current_hour = parseInt(currentTime / 3600) % 24,
-//     current_minute = parseInt(currentTime / 60) % 60,
-//     current_seconds_long = currentTime % 60,
-//     current_seconds = current_seconds_long.toFixed(),
-//     current_time = (current_minute < 10 ? "0" + current_minute : current_minute) + ":" + (current_seconds < 10 ? "0" + current_seconds : current_seconds);
-
-//   return current_time;
-// }
-
-// initPlayers(jQuery('#player-container').length);
-  </script>  
+  <link rel="stylesheet" type="text/css" href="{% static 'css/MMWD.css' %}">
+  <script src="{% static 'js/jquery-1.12.4.min.js' %}" type></script>
 </head>
 <body>
   <div class="container">
@@ -343,24 +15,79 @@
         <p class="making_music_with">MAKING MUSIC WITH DICE</p>
       </div>
       <ul class="rectangle_sortable">
-          {% for midi in music_list %}
-          <li class="ui-state-default midi_music{{forloop.counter}}" data-value="{{ midi }}">
-            <a class="ui-num">1</a>  
-            <div class="ui-label">{{ midi }}</div>
-          </li>
-         {% endfor %}
-     </ul>
+        {% for midi in music_list %}
+        <li class="ui-state-default midi_music{{forloop.counter}}" data-value="{{ midi }}">
+          <a class="ui-num">{{forloop.counter}}</a>
+          <div class="ui-label">{{ midi }}</div>
+        </li>
+        {% endfor %}
+      </ul>
       <div class="rectangle_bottom_result" id="playOne">
-        <img src="{% static "ic-play.png" %}" srcset="{% static 'ic-play@2x.png' %} 2x, {% static 'ic-play@3x.png' %} 3x" class="ic_play_result" data-value="{{ midi }}" id="play">
+        <img src="{% static 'ic-play.png' %}" srcset="{% static 'ic-play@2x.png' %} 2x, {% static 'ic-play@3x.png' %} 3x"
+          class="ic_play_result" data-value="{{ midi }}" id="play">
         <audio id="theMusic" ontimeupdate="move(this)" type="audio/wav">
-          <source src="{% get_media_prefix %}{{music}}" >
+          <source src="{% get_media_prefix %}{{music}}">
         </audio>
         <div id="myProgress">
-            <div id="myBar"></div>
+          <div id="myBar"></div>
         </div>
-        <img src="{% static 'ic-download.png' %}" srcset="{% static 'ic-download@2x.png' %} 2x, {% static 'ic-download@3x.png' %} 3x " class="ic_download_result" data-value="{{ midi }}">
+        <img src="{% static 'ic-download.png' %}" srcset="{% static 'ic-download@2x.png' %} 2x, {% static 'ic-download@3x.png' %} 3x "
+          class="ic_download_result" data-value="{{ midi }}">
       </div>
     </div>
   </div>
+  <script>
+    var song = document.getElementById("theMusic");
+    var duration = song.duration;
+    var listLength = $('.ui-state-default').length;
+    var sec = duration / listLength;
+    var seq = 0;
+    function seek(e) {
+      var percent = e.offsetX / this.offsetWidth;
+      song.currentTime = percent * song.duration;
+      var elem = document.getElementById("myBar");
+      var time = song.currentTime;
+      var width = time / duration * 100;
+      elem.style.width = width + '%';
+    }
+    $(document).ready(function () {
+      var myprogress = document.getElementById('myProgress');
+      myprogress.addEventListener("click", seek);
+    });
+    $(document).on('click', '#play', function () {
+      if (song.paused) {
+        song.play();
+        $(this).attr("src", "{% static 'ic-pause.png' %}");
+        $(this).attr("srcset", "{% static 'ic-pause@2x.png' %} 2x,{% static 'ic-pause@3x.png' %} 3x ");
+      } else {
+        song.pause();
+        $(this).attr("src", "{% static 'ic-play.png' %}");
+        $(this).attr("srcset", "{% static 'ic-play@2x.png' %} 2x,{% static 'ic-play@3x.png' %} 3x ");
+      }
+    });
+    function move(event) {
+      var song = document.getElementById("theMusic");
+      var duration = song.duration;
+      var elem = document.getElementById("myBar");
+      var time = event.currentTime;
+      var width = time / duration * 100;
+      var listLength = $('.ui-state-default').length;
+      var sec = duration / listLength;
+      if (width >= 100) {
+        $('.ic_play_result').attr("src", "{% static 'ic-play.png' %}");
+        $('.ic_play_result').attr("srcset", "{% static 'ic-play@2x.png' %} 2x,{% static 'ic-play@3x.png' %} 3x ");
+      } else {
+        elem.style.width = width + '%';
+      }
+      var t = Math.floor(time / sec) + 1;
+      $('.ui-state-default').each(function () {
+        $(this).removeClass('moment');
+      });
+      $('.midi_music' + (t)).addClass('moment');
+      var moment = document.getElementsByClassName('moment')[0];
+      window.scrollTo(0, moment.offsetTop-40);
+    }
+  </script>
 </body>
+
 </html>

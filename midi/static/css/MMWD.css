@@ -1,0 +1,244 @@
+body{margin:0;}
+audio { display:none; }
+ul{width:100%;}
+.container {
+width: 100%;
+padding-right: 15px;
+padding-left: 15px;
+margin-right: auto;
+margin-left: auto;
+}
+.rectangle_top {
+width: 360px;
+height: 42px;
+background-color: #242424;
+position: fixed;
+top:0;
+}
+.making_music_with {
+display:inline-block;
+font-family: Roboto;
+font-size: 12px;
+font-weight: 500;
+font-style: normal;
+font-stretch: normal;
+line-height: normal;
+letter-spacing: normal;
+color: #ffffff;
+padding-left: 4%;
+}
+.reset{
+display:inline-block;
+margin-left:38%;
+}
+.reset > a{
+font-family: Roboto;
+font-size: 12px;
+font-weight: 500;
+font-style: normal;
+font-stretch: normal;
+line-height: normal;
+letter-spacing: normal;
+color: #ffffff;
+text-decoration: none;
+}
+.samdasu{
+min-height: 740px;
+background-image: linear-gradient(to bottom, #e26e83, #7379d4);
+}
+.rectangle_sortable{
+list-style-type: none; margin: 0; padding: 0; 
+padding-top: 30px;
+padding-bottom: 48px;
+}
+.rectangle_sortable li {
+width: 360px;
+height:72px;
+max-height: 72px;
+border: solid 1px #ffffff;
+background-color: rgba(255, 255, 255, 0.2);
+display: flex;
+align-items: center;
+} 
+.ui-label { 
+display:inline-block;
+margin-left: 16px;
+font-family: Roboto;
+font-size: 28px;
+font-weight: bold;
+font-style: normal;
+font-stretch: normal;
+line-height: normal;
+letter-spacing: normal;
+color: #ffffff;
+min-width:27px;
+}
+.ui-num{
+display:inline-block;
+width: 7px;
+height: 14px;
+font-family: Roboto;
+font-size: 12px;
+font-weight: 300;
+font-style: normal;
+font-stretch: normal;
+line-height: normal;
+letter-spacing: normal;
+color: #ffffff;
+margin-left: 16px;
+}
+.left-item{
+display:inline-block;
+margin-top: 0;
+ margin-bottom : 0;
+ margin-left:110px;
+}
+.ic_play {
+cursor:pointer;
+display:inline-block;
+width: 24px;
+height: 24px;
+object-fit: contain;
+}
+.ic_add {
+cursor:pointer;
+width: 48px;
+height: 48px;
+object-fit: contain;
+}
+.ic_add_new{
+cursor:pointer;
+width: 48px;
+height: 48px;
+object-fit: contain;
+}
+.btn_vae{
+width: 48px;
+margin-top: 20%;
+margin-left: 24%;
+}
+.btn_vae_add{
+width: 14px;
+margin-top: 20%;
+margin-left: 24%;
+}
+.btn_vae_delete{
+width: 48px;
+margin-left: 16%;
+}
+.rectangle_bottom {
+cursor: pointer;
+height: 60px;
+background-color: #242424;
+position: fixed;
+bottom: 0;
+width: 100%;
+text-align: center;
+max-width: 360px;
+}
+.selection_complete{
+font-family: Roboto;
+font-size: 16px;
+font-weight: bold;
+font-style: normal;
+font-stretch: normal;
+line-height: normal;
+letter-spacing: normal;
+color: #ffffff;
+}
+.rectangle_bottom_result {
+  cursor: pointer;
+  height: 60px;
+  background-color: #242424;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 360px;
+  }
+  .ic_play_result{
+  display: inline-block;
+  align-items: center;
+  padding:16px;
+  }
+  .ic_download_result{
+  display: inline-block;
+  align-items: center;
+  margin-left: 8%;
+  padding: 24px;
+  }
+  .moment{
+  background-color: rgba(36, 36, 36, 0.8)!important;
+  overflow: auto;
+  }
+  #myProgress {
+  margin:20px 0 20px 0;
+  display:inline-block;
+  width: 54%;
+  background-color: rgba(255, 255, 255, 0.4);;
+  }
+  #myBar {
+  width: 1%;
+  height: 2.5px;
+  background-color: rgba(255, 255, 255, 0.6);;
+  }  
+
+@media screen and (min-width: 1200px){
+.container {
+max-width: 360px;
+}
+}
+@media (min-width: 992px){
+.container {
+max-width: 360px;
+}
+}
+@media (min-width: 768px){
+.container {
+max-width: 360px;
+}
+}
+@media (min-width: 576px){
+.container {
+max-width: 360px;
+}
+}
+@media (max-width: 414px){
+.container {
+max-width: 360px;
+}
+}
+@media screen and (max-width: 376px){
+.container {
+max-width: 360px;
+width: 100%;
+padding-right: 0;
+padding-left: 0;
+margin-right: 0;
+margin-left: 0;
+}
+}
+@media screen and (max-width: 320px){
+.container {
+max-width: 320px;
+width: 100%;
+padding-right: 0px;
+padding-left: 0px;
+margin-right: auto;
+margin-left: auto;
+}
+.rectangle_top{
+width: 320px;
+}
+.rectangle_bottom{
+width:320px;
+}
+.reset{
+margin-left: 34%;
+}
+.btn_vae{
+margin-left:16%;
+}
+.btn_vae_delete{
+margin-left:7%;
+}
+}
