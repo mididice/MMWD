@@ -106,7 +106,7 @@ margin-left: 16px;
 display:inline-block;
 margin-top: 2px;
 margin-bottom : 0;
-margin-left:128px;
+margin-left:116px;
 }
 .is_reset{
   width: 54px;
@@ -124,6 +124,7 @@ display:inline-block;
 width: 24px;
 height: 24px;
 object-fit: contain;
+padding:12px;
 }
 .ic_add {
 cursor:pointer;
