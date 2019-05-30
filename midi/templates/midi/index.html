@@ -93,6 +93,7 @@
         preobject.remove();
         midiwrap.addClass('target')
         $('.ui-name').filter(':last').next().children().hide();
+        $("#sortable").sortable('refresh');
   });
   $(document).on('mouseup', '.ic_add_new', function(){
     var premidi = $(this).attr("data-value");
@@ -115,6 +116,7 @@
     wrapobject.attr('data-taeho', premidi+"_"+nexmidi);
     $(this).remove();
     $('.ui-name').filter(':last').next().children().hide();
+    $("#sortable").sortable('refresh');
   });
   
   var ungroup = function(pre, next){
