@@ -66,7 +66,7 @@
     return result;
     //+"<div class='btn_vae_delete' onclick='ungroup(" + ungroup_temp + ")'>X</div>"
   }
-    $(document).on('click', '.ic_add', function(e) {
+    $(document).on('touchstart', '.ic_add', function(e) {
         var premidi = $(this).attr("data-value");
         var premidi_index = order.findIndex(x=> x == premidi)
         var nexmidi = order[premidi_index+1];
@@ -90,7 +90,7 @@
         midiwrap.addClass('target')
         $('.ui-name').filter(':last').next().children().hide();
   });
-  $(document).on('click', '.ic_add_new', function(){
+  $(document).on('touchstart', '.ic_add_new', function(){
     var premidi = $(this).attr("data-value");
     var premidi_index = order.findIndex(x=> x == premidi)
     var nexmidi = order[premidi_index+1];
@@ -130,10 +130,8 @@
       group.outerHTML = prewrap + nextwrap;
   }
   var playing ;
-  $(document).on('click', '.ic_play', function(){
+  $(document).on('touchstart', '.ic_play', function(){
     var name = $(this).attr("data-value");
-    // audio.pause();
-    // audio = new Audio('/MMWD/static/wave/'+filename+'.wav');
     var audio = document.getElementById(name);
     if (audio.paused) {
       audio.play();

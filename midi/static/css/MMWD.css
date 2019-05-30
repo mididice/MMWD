@@ -125,23 +125,37 @@ width: 24px;
 height: 24px;
 object-fit: contain;
 padding:12px;
+-moz-user-select: -moz-none;
+-khtml-user-select: none;
+-webkit-user-select: none;
+user-select: none;
 }
 .ic_add {
 cursor:pointer;
 width: 26px;
 height: 26px;
 object-fit: contain;
+-moz-user-select: -moz-none;
+-khtml-user-select: none;
+-webkit-user-select: none;
+user-select: none;
+padding:8px;
 }
 .ic_add_new{
 cursor:pointer;
 width: 26px;
 height: 26px;
 object-fit: contain;
+-moz-user-select: -moz-none;
+-khtml-user-select: none;
+-webkit-user-select: none;
+user-select: none;
+padding:8px;
 }
 .btn_vae{
 width: 26px;
 margin-top: 20%;
-margin-left: 2%;
+margin-left: 1%;
 }
 .btn_vae_add{
 width: 14px;
