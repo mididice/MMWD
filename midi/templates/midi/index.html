@@ -103,17 +103,18 @@
     var wrapvalue = $(this).attr("data-append");
     var wrapobject = $("div").find('*[data-taeho="'+wrapvalue+'"]');
     if(wrapobject.next().hasClass('midigroup')){
+      var changetarget = wrapobject.next().attr('data-taeho');
+      console.log(changetarget)
       wrapobject.append(newintermidiwrap(premidi, nexmidi));
       wrapobject.append(wrapobject.next().children());
-      var changetarget = wrapobject.next().attr('data-taeho');
       wrapobject.attr('data-taeho', changetarget);
       wrapobject.next().remove();
     }else{
       wrapobject.append(newintermidiwrap(premidi, nexmidi));
       wrapobject.append(newnextwrap(premidi, nexmidi));
       wrapobject.next().remove();
+      wrapobject.attr('data-taeho', premidi+"_"+nexmidi);
     }
-    wrapobject.attr('data-taeho', premidi+"_"+nexmidi);
     $(this).remove();
     $('.ui-name').filter(':last').next().children().hide();
     $("#sortable").sortable('refresh');

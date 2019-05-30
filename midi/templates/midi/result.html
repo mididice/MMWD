@@ -25,14 +25,25 @@
       </div>
       <ul class="rectangle_sortable">
         {% for midi in music_list %}
-        <li class="ui-state-default midi_music{{forloop.counter}}" data-value="{{ midi }}">
+        {% if '+' in midi %}
+        <li class="ui-state-default rectangle-vae midi_music{{forloop.counter}}" data-value="{{ midi }}">
           <div class="ui-label" data-label={{midi}}>
-            <img src="{% static '' %}{{ midi }}.png" srcset="{% static '' %}{{ midi }}@2x.png 2x, {% static '' %}{{ midi }}@3x.png 3x" class="ic_circle">
+            <img src="{% static 'hybrid.png' %}" srcset="{% static 'hybrid@2x.png' %} 2x, {% static 'hybrid@3x.png' %} 3x" class="ic_circle">
           </div>
           <div class="ui-name">
             <span>{{midi}}</span>
           </div>
         </li>
+        {% else %}
+        <li class="ui-state-default midi_music{{forloop.counter}}" data-value="{{ midi }}">
+            <div class="ui-label" data-label={{midi}}>
+              <img src="{% static '' %}{{ midi }}.png" srcset="{% static '' %}{{ midi }}@2x.png 2x, {% static '' %}{{ midi }}@3x.png 3x" class="ic_circle">
+            </div>
+            <div class="ui-name">
+              <span>{{midi}}</span>
+            </div>
+          </li>
+        {% endif %}
         {% endfor %}
       </ul>
       <div class="rectangle_bottom_result">

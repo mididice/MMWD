@@ -4,6 +4,7 @@ from django.conf import settings
 import os
 import os.path
 import numpy as np
+import re
 from midi import combine
 
 
@@ -19,7 +20,8 @@ def make_one(request, slug):
     result_dir = settings.MEDIA_ROOT
     filename = ''.join(slug)+".wav"
     outfile = os.path.join(result_dir, filename)
-    result_list = slug.split('-')
+    altslug = slug.replace('_', '+')
+    result_list = altslug.split('-')
     if not os.path.isdir(result_dir):
         os.mkdir(result_dir)
     if not os.path.isfile(outfile):
