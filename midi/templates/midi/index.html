@@ -3,6 +3,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta property="og:title" content="MMWD" />
+  <meta property="og:image" content="{% static 'favicon-16x16.png' %}" />
+  <meta property="og:description" content="making music with dice"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MAKING MUSIC WITH DICE</title>
   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
@@ -67,7 +70,7 @@
     return result;
     //+"<div class='btn_vae_delete' onclick='ungroup(" + ungroup_temp + ")'>X</div>"
   }
-    $(document).on('mousedown', '.ic_add', function(e) {
+    $(document).on('mouseup', '.ic_add', function(e) {
         var premidi = $(this).attr("data-value");
         var premidi_index = order.findIndex(x=> x == premidi)
         var nexmidi = order[premidi_index+1];
@@ -91,7 +94,7 @@
         midiwrap.addClass('target')
         $('.ui-name').filter(':last').next().children().hide();
   });
-  $(document).on('mousedown', '.ic_add_new', function(){
+  $(document).on('mouseup', '.ic_add_new', function(){
     var premidi = $(this).attr("data-value");
     var premidi_index = order.findIndex(x=> x == premidi)
     var nexmidi = order[premidi_index+1];
@@ -131,7 +134,7 @@
       group.outerHTML = prewrap + nextwrap;
   }
   var playing ;
-  $(document).on('mousedown', '.ic_play', function(){
+  $(document).on('mouseup', '.ic_play', function(){
     var name = $(this).attr("data-value");
     var audio = document.getElementById(name);
     if (audio.paused) {
