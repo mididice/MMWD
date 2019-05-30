@@ -70,7 +70,7 @@
     return result;
     //+"<div class='btn_vae_delete' onclick='ungroup(" + ungroup_temp + ")'>X</div>"
   }
-    $(document).on('mouseup', '.ic_add', function(e) {
+    $(document).on('mousedown', '.ic_add', function(e) {
         var premidi = $(this).attr("data-value");
         var premidi_index = order.findIndex(x=> x == premidi)
         var nexmidi = order[premidi_index+1];
@@ -95,7 +95,7 @@
         $('.ui-name').filter(':last').next().children().hide();
         $("#sortable").sortable('refresh');
   });
-  $(document).on('mouseup', '.ic_add_new', function(){
+  $(document).on('mousedown', '.ic_add_new', function(){
     var premidi = $(this).attr("data-value");
     var premidi_index = order.findIndex(x=> x == premidi)
     var nexmidi = order[premidi_index+1];
@@ -136,7 +136,7 @@
       group.outerHTML = prewrap + nextwrap;
   }
   var playing ;
-  $(document).on('mouseup', '.ic_play', function(){
+  $(document).on('touchstart', '.ic_play', function(){
     var name = $(this).attr("data-value");
     var audio = document.getElementById(name);
     if (audio.paused) {
