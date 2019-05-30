@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MAKING MUSIC WITH DICE</title>
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/MMWD.css' %}">
   <script src="{% static 'js/jquery-1.12.4.min.js' %}" type></script>
   <script src="{% static 'js/jquery-ui.min.js' %}" type></script>
@@ -39,7 +40,7 @@
             '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add_new" data-value="'+ nexmidi +'" data-append="'+premidi+'_'+nexmidi+'"></div>' +
             '<div class="left-item">' +
             '<img src="{% static "ic-play-black.png" %}" srcset="{% static "ic-play-black@2x.png" %} 2x, {% static "ic-play-black@3x.png" %} 3x" class="ic_play" data-value="'+ nexmidi +'">' +
-            '<audio src="{% static "" %}wave/' + nexmidi + '.wav" class="audio_wave" type="audio/wav" ontimeupdate=recover(this)></audio></div></li>';
+            '<audio src="{% static "" %}wave/' + nexmidi + '.wav" class="audio_wave" type="audio/wav" id=' + nexmidi + ' ontimeupdate=recover(this)></audio></div></li>';
     return result;
   }
   var newnextwrap = function(premidi, nexmidi){
@@ -50,23 +51,23 @@
             '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add_new" data-value="'+ nexmidi +'" data-append="'+premidi+'_'+nexmidi+'"></div>' +
             '<div class="left-item">' +
             '<img src="{% static "ic-play-black.png" %}" srcset="{% static "ic-play-black@2x.png" %} 2x, {% static "ic-play-black@3x.png" %} 3x" class="ic_play" data-value="'+ nexmidi +'">' +
-            '<audio src="{% static "" %}wave/' + nexmidi + '.wav" class="audio_wave" type="audio/wav" ontimeupdate=recover(this)></audio></div></li>';
+            '<audio src="{% static "" %}wave/' + nexmidi + '.wav" class="audio_wave" type="audio/wav" id=' + nexmidi + ' ontimeupdate=recover(this)></audio></div></li>';
     return result;
   }
   var newintermidiwrap = function(premidi, nexmidi){
     var result = "<li class='ui-state-default midi_music rectangle-vae' data-music='"+premidi+"_"+nexmidi+"'>"
         +"<div class='ui-label' data-label='"+premidi+"_"+nexmidi+"'>"
         +"<img src='{% static 'hybrid.png' %}' srcset='{% static 'hybrid@2x.png' %} 2x, {% static 'hybrid@3x.png' %} 3x' class='ic_circle'></div>"
-        +"<div class='ui-name'><span>"+premidi+"_"+nexmidi+"</span></div>"
+        +"<div class='ui-name'><span>"+premidi+" + "+nexmidi+"</span></div>"
         +"<div class='btn_vae'></div>"
         +"<div class='left-item'>"
         +"<img src='{% static 'ic-play-black.png' %}' srcset='{% static 'ic-play-black@2x.png' %} 2x, {% static 'ic-play-black@3x.png' %} 3x' class='ic_play' data-value='"+premidi+"+"+nexmidi+"'>"
-        +"<audio src='{% static '' %}wave/" +premidi+'+'+nexmidi+ ".wav' class='audio_wave' type='audio/wav' ontimeupdate=recover(this)></audio>"
+        +"<audio src='{% static '' %}wave/" +premidi+'+'+nexmidi+ ".wav' class='audio_wave' type='audio/wav' id=" +premidi+'+'+nexmidi+ " ontimeupdate=recover(this)></audio>"
         "</div></li>";
     return result;
     //+"<div class='btn_vae_delete' onclick='ungroup(" + ungroup_temp + ")'>X</div>"
   }
-    $(document).on('click', '.ic_add', function(e) {
+    $(document).on('mousedown', '.ic_add', function(e) {
         var premidi = $(this).attr("data-value");
         var premidi_index = order.findIndex(x=> x == premidi)
         var nexmidi = order[premidi_index+1];
@@ -90,7 +91,7 @@
         midiwrap.addClass('target')
         $('.ui-name').filter(':last').next().children().hide();
   });
-  $(document).on('click', '.ic_add_new', function(){
+  $(document).on('mousedown', '.ic_add_new', function(){
     var premidi = $(this).attr("data-value");
     var premidi_index = order.findIndex(x=> x == premidi)
     var nexmidi = order[premidi_index+1];
@@ -130,10 +131,8 @@
       group.outerHTML = prewrap + nextwrap;
   }
   var playing ;
-  $(document).on('click', '.ic_play', function(){
+  $(document).on('mousedown', '.ic_play', function(){
     var name = $(this).attr("data-value");
-    // audio.pause();
-    // audio = new Audio('/MMWD/static/wave/'+filename+'.wav');
     var audio = document.getElementById(name);
     if (audio.paused) {
       audio.play();

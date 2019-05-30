@@ -14,8 +14,8 @@ def index(request):
 
 
 def make_one(request, slug):
-    base_dir = settings.BASE_DIR
-    basic_dir = os.path.join(base_dir, 'wavebasic')
+    static_dir = settings.STATIC_ROOT
+    wave_dir = os.path.join(static_dir, 'wave')
     result_dir = settings.MEDIA_ROOT
     filename = ''.join(slug)+".wav"
     outfile = os.path.join(result_dir, filename)
@@ -23,7 +23,7 @@ def make_one(request, slug):
     if not os.path.isdir(result_dir):
         os.mkdir(result_dir)
     if not os.path.isfile(outfile):
-        combine.tidalwave(basic_dir, result_list, outfile)
+        combine.tidalwave(wave_dir, result_list, outfile)
     return render(request, 'midi/result.html',
                   context={'music_list': result_list, 'music': filename, 'identification': slug})
 
