@@ -23,5 +23,5 @@ python manage.py runserver
 
 ### Screen
 
-[mmwd](https://github.com/mididice/MMWD/blog/master/main.png)
+![mmwd](https://github.com/mididice/MMWD/blob/master/main.PNG)
 
