@@ -10,14 +10,13 @@ making music with dice.
 python >= 3.5
 django
 numpy
-
 ```
 
 ### Install
 
 ```
 git clone https://github.com/mididice/MMWD
-pip install requirement
+pip install requirement.txt
 python manage.py runserver
 ```
 
