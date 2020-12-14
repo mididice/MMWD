@@ -9,6 +9,6 @@ urlpatterns = [
     path('vae', views.index, name='vae'),
     path('music/<slug:slug>/', views.make_one, name='one'),
     path('save/<slug:slug>/', views.download, name='download'),
-
+    path('dice', views.dice, name='dice'),
 ]
 

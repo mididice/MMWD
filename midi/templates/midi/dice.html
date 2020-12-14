@@ -1,0 +1,93 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta property="og:title" content="MMWD" />
+  <meta property="og:image" content="{% static 'favicon-16x16.png' %}" />
+  <meta property="og:description" content="making music with dice"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MAKING MUSIC WITH DICE</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/MMWD.css' %}">
+  <script src="{% static 'js/jquery-1.12.4.min.js' %}" type></script>
+  <script src="{% static 'js/jquery-ui.min.js' %}" type></script>
+  <script src="{% static 'js/jquery.ui.touch-punch.min.js' %}" type></script>
+  <script>
+  $( function() {
+    $('#rollDice').click(function(){
+      var pinkDiceNumber = Math.floor(Math.random() * 6)+1; 
+      animateDice(pinkDiceNumber);
+    });
+    $('.nav').click(function(){
+      $('.modal').toggleClass("visible");
+    });
+  });
+  var animateDice = function(pinkDice) {
+    var i = 0;
+    var timer = setInterval(function(){
+      if(i<10){
+        $('.midi_dice').children().first().attr('src', '/static/dice/PinkDice01_0000'+i+'.png');
+      }else if(i<60){       
+          $('.midi_dice').children().first().attr('src', '/static/dice/PinkDice01_000'+i+'.png');            
+      }else{
+          $('.midi_dice').children().first().attr('src', '/static/dice/PinkDice0'+pinkDice+'.png');
+          clearInterval(timer);
+          return;
+      }
+      i++;
+    }, 33);
+  };
+  </script>
+  <style>
+  .midi_dice{
+    padding-top:50%;
+  }
+  .midi_dice img{
+    width:100%;
+  }
+  .modal{
+    display: none;
+    position: fixed;
+    z-index:10;
+    height:100%;
+    top: 100px;
+    background-color: #fff;
+  }
+  .visible{
+    display: block;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="samdasu">
+      <div class="rectangle_top">
+        <span class="nav">
+          <a>
+            <img src="{% static 'icon-hamburger.png' %}" srcset="{% static 'icon-hamburger@2x.png' %} 2x, {% static 'icon-hamburger@3x.png' %} 3x" alt="reset">
+          </a>
+        </span>
+        <span class="making_music_with">MMWD</span>
+        <span class="reset">
+          <a href="/">
+            <img src="{% static 'ic-reset.png' %}" srcset="{% static 'ic-reset@2x.png' %} 2x, {% static 'ic-reset@3x.png' %} 3x" alt="reset">
+          </a>
+        </span>
+      </div>
+      <div class="modal">
+        <span><a href="/">센음악</a></span>
+        <span><a href="/middle">중간음악</a></span>
+        <span><a href="/dice">주사위</a></span>
+      </div>
+      <div class="midi_dice">
+          <img src="/static/dice/PinkDice00.png">
+      </div>
+      <div class="rectangle_bottom" id="rollDice">
+          <img src="{% static 'roll-dice.png' %}" srcset="{% static 'roll-dice@2x.png' %} 2x, {% static 'roll-dice@3x.png' %} 3x">
+      </div>
+    </div>
+  </div>
+</body>
+</html>

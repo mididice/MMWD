@@ -20,8 +20,12 @@ height: 100px;
 position: fixed;
 top:0;
 }
+.nav{
+  float:left;
+  padding: 4%;
+}
 .making_music_with {
-display:inline-block;
+  float:left;
 font-family: "Roboto";
 font-size: 23px;
 font-weight: bold;
@@ -34,8 +38,8 @@ padding: 4%;
 margin: 0;
 }
 .reset{
-display: inline-block;
-margin-left: 48%;
+float: right;
+padding: 4%;
 }
 .reset > a{
 font-family: Roboto;

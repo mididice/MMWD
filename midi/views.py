@@ -37,3 +37,6 @@ def download(request, slug):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
     raise Http404
+
+def dice(request):
+    return render(request, 'midi/dice.html')
