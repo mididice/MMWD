@@ -8,6 +8,7 @@
   <meta property="og:description" content="making music with dice"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MAKING MUSIC WITH DICE</title>
+  <link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/MMWD.css' %}">
@@ -22,6 +23,9 @@
     });
     $('.nav').click(function(){
       $('.modal').toggleClass("visible");
+    });
+    $('.icon_close').click(function(){
+      $('.modal').removeClass("visible");
     });
   });
   var animateDice = function(pinkDice) {
@@ -40,25 +44,6 @@
     }, 33);
   };
   </script>
-  <style>
-  .midi_dice{
-    padding-top:50%;
-  }
-  .midi_dice img{
-    width:100%;
-  }
-  .modal{
-    display: none;
-    position: fixed;
-    z-index:10;
-    height:100%;
-    top: 100px;
-    background-color: #fff;
-  }
-  .visible{
-    display: block;
-  }
-  </style>
 </head>
 <body>
   <div class="container">
@@ -77,9 +62,13 @@
         </span>
       </div>
       <div class="modal">
-        <span><a href="/">센음악</a></span>
-        <span><a href="/middle">중간음악</a></span>
-        <span><a href="/dice">주사위</a></span>
+        <div class="modal_content">
+          <img src="/static/icon-close.svg" class="icon_close">
+          <span class="nav_menu"><a href="/bright">밝은 느낌</a></span>
+          <span class="nav_menu"><a href="/dark">어두운 느낌</a></span>
+          <span class="nav_menu"><a href="/class">우리반 주제곡 만들기</a></span>
+          <span class="nav_menu nav_active"><a href="/dice">주사위</a></span>
+        </div>
       </div>
       <div class="midi_dice">
           <img src="/static/dice/PinkDice00.png">
