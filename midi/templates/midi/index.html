@@ -45,7 +45,7 @@
   var newlastwrap = function(premidi, nexmidi){
     var result = '<li class="ui-state-default midi_music" data-music="' + nexmidi + '">' +
             '<div class="ui-label" data-label="'+nexmidi+'">' +
-            '<img src="{% static "" %}'+nexmidi+'.png" srcset="{% static "" %}'+nexmidi+'@2x.png 2x, {% static "" %}'+nexmidi+'@3x.png 3x" class="ic_circle"></div>'+
+            '<img src="{% static "" %}img/one/'+nexmidi+'.png" srcset="{% static "" %}img/one/'+nexmidi+'@2x.png 2x, {% static "" %}img/one/'+nexmidi+'@3x.png 3x" class="ic_circle"></div>'+
             '<div class="ui-name"><span>'+nexmidi+'</span></div>' +
             '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add_new" data-value="'+ nexmidi +'" data-append="'+premidi+'_'+nexmidi+'"></div>' +
             '<div class="left-item">' +
@@ -56,7 +56,7 @@
   var newnextwrap = function(premidi, nexmidi){
     var result = '<li class="ui-state-default midi_music" data-music="' + nexmidi + '">' +
             '<div class="ui-label" data-label="'+nexmidi+'">' +
-            '<img src="{% static "" %}'+nexmidi+'.png" srcset="{% static "" %}'+nexmidi+'@2x.png 2x, {% static "" %}'+nexmidi+'@3x.png 3x" class="ic_circle"></div>'+
+            '<img src="{% static "" %}img/one/'+nexmidi+'.png" srcset="{% static "" %}img/one/'+nexmidi+'@2x.png 2x, {% static "" %}img/one/'+nexmidi+'@3x.png 3x" class="ic_circle"></div>'+
             '<div class="ui-name"><span>'+nexmidi+'</span></div>' +
             '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add_new" data-value="'+ nexmidi +'" data-append="'+premidi+'_'+nexmidi+'"></div>' +
             '<div class="left-item">' +
@@ -208,7 +208,7 @@
          {% for midi in json_list %}
           <li class="ui-state-default target midi_music" data-music="{{ midi }}">
             <div class="ui-label" data-label={{midi}}>
-              <img src="{% static '' %}{{ midi }}.png" srcset="{% static '' %}{{ midi }}@2x.png 2x, {% static '' %}{{ midi }}@3x.png 3x" class="ic_circle">
+              <img src="{% static '' %}img/one/{{ midi }}.png" srcset="{% static '' %}img/one/{{ midi }}@2x.png 2x, {% static '' %}img/one/{{ midi }}@3x.png 3x" class="ic_circle">
             </div>
             <div class="ui-name">
               <span>{{midi}}</span>

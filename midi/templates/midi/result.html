@@ -52,7 +52,7 @@
         {% else %}
         <li class="ui-state-default midi_music{{forloop.counter}}" data-value="{{ midi }}">
             <div class="ui-label" data-label={{midi}}>
-              <img src="{% static '' %}{{ midi }}.png" srcset="{% static '' %}{{ midi }}@2x.png 2x, {% static '' %}{{ midi }}@3x.png 3x" class="ic_circle">
+              <img src="{% static '' %}img/{{ type }}{{ midi }}.png" srcset="{% static '' %}img/{{ type }}{{ midi }}@2x.png 2x, {% static '' %}img/{{ type }}{{ midi }}@3x.png 3x" class="ic_circle">
             </div>
             <div class="ui-name">
               <span>{{midi}}</span>
@@ -65,12 +65,12 @@
         <img src="{% static 'ic-play.png' %}" srcset="{% static 'ic-play@2x.png' %} 2x, {% static 'ic-play@3x.png' %} 3x"
           class="ic_play_result" data-value="{{ midi }}" id="play">
         <audio id="theMusic" ontimeupdate="move(this)" type="audio/wav">
-          <source src="{% get_media_prefix %}{{music}}">
+          <source src="{% get_media_prefix %}{{ type }}{{music}}">
         </audio>
         <div id="myProgress">
           <div id="myBar"></div>
         </div>
-        <a href="/save/{{ identification }}"><img src="{% static 'ic-download.png' %}" srcset="{% static 'ic-download@2x.png' %} 2x, {% static 'ic-download@3x.png' %} 3x "
+        <a href="/save/{{ type }}{{ identification }}"><img src="{% static 'ic-download.png' %}" srcset="{% static 'ic-download@2x.png' %} 2x, {% static 'ic-download@3x.png' %} 3x "
           class="ic_download_result" data-value="{{ midi }}"></a>
       </div>
     </div>

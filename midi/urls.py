@@ -11,7 +11,10 @@ urlpatterns = [
     path('dark', views.dark, name='dark'),
     path('mixed', views.mixed, name='mixed'),
     path('music/<slug:slug>/', views.make_one, name='one'),
-    path('save/<slug:slug>/', views.download, name='download'),
+    path('bright/<slug:slug>/', views.make_bright, name='make_bright'),
+    path('dark/<slug:slug>/', views.make_dark, name='make_dark'),
+    path('mixed/<slug:slug>/', views.make_mixed, name='make_miexd'),
+    path('save/<slug:type>/<slug:slug>/', views.download, name='download'),
     path('dice', views.dice, name='dice'),
 ]
 

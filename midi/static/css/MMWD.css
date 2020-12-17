@@ -300,6 +300,9 @@ max-width: 360px;
 .container {
 max-width: 360px;
 }
+.modal {
+  max-width: 360px;
+}
 }
 @media (max-width: 414px){
 .container {
