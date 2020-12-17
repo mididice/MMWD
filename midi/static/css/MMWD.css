@@ -57,6 +57,10 @@ text-decoration: none;
 min-height: 740px;
 background-image: linear-gradient(to bottom, #c95466, #7379d4 99%);
 }
+.henry{
+min-height: 740px;
+background-image: linear-gradient(to bottom, #c95466, #7379d4 99%);
+}
 .rectangle_sortable{
 list-style-type: none; margin: 0; padding: 0; 
 padding-top: 102px;

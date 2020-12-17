@@ -15,7 +15,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="samdasu">
+    <div class="henry">
       <div class="rectangle_top">
         <span class="nav">
           <a>
@@ -24,10 +24,19 @@
         </span>
         <span class="making_music_with">MMWD</span>
         <span class="reset">
-          <a href="/MMWD">
+          <a href="/">
             <img src="{% static 'ic-reset.png' %}" srcset="{% static 'ic-reset@2x.png' %} 2x, {% static 'ic-reset@3x.png' %} 3x" alt="reset">
           </a>
         </span>
+      </div>
+      <div class="modal">
+        <div class="modal_content">
+          <img src="/static/icon-close.svg" class="icon_close">
+          <span class="nav_menu"><a href="/bright">밝은 느낌</a></span>
+          <span class="nav_menu"><a href="/dark">어두운 느낌</a></span>
+          <span class="nav_menu"><a href="/mixed">우리반 주제곡 만들기</a></span>
+          <span class="nav_menu"><a href="/dice">주사위</a></span>
+        </div>
       </div>
       <ul class="rectangle_sortable">
         {% for midi in music_list %}
@@ -61,7 +70,7 @@
         <div id="myProgress">
           <div id="myBar"></div>
         </div>
-        <a href="/MMWD/save/{{ identification }}"><img src="{% static 'ic-download.png' %}" srcset="{% static 'ic-download@2x.png' %} 2x, {% static 'ic-download@3x.png' %} 3x "
+        <a href="/save/{{ identification }}"><img src="{% static 'ic-download.png' %}" srcset="{% static 'ic-download@2x.png' %} 2x, {% static 'ic-download@3x.png' %} 3x "
           class="ic_download_result" data-value="{{ midi }}"></a>
       </div>
     </div>
@@ -83,6 +92,12 @@
     $(document).ready(function () {
       var myprogress = document.getElementById('myProgress');
       myprogress.addEventListener("click", seek);
+      $('.nav').click(function(){
+        $('.modal').toggleClass("visible");
+      });
+      $('.icon_close').click(function(){
+        $('.modal').removeClass("visible");
+      });
     });
     $(document).on('click', '#play', function () {
       if (song.paused) {

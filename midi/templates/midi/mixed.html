@@ -45,23 +45,23 @@
   var newlastwrap = function(premidi, nexmidi){
     var result = '<li class="ui-state-default midi_music" data-music="' + nexmidi + '">' +
             '<div class="ui-label" data-label="'+nexmidi+'">' +
-            '<img src="{% static "" %}img/middle/'+nexmidi+'.png" srcset="{% static "" %}img/middle/'+nexmidi+'@2x.png 2x, {% static "" %}img/middle/'+nexmidi+'@3x.png 3x" class="ic_circle"></div>'+
+            '<img src="{% static "" %}img/mixed/'+nexmidi+'.png" srcset="{% static "" %}img/mixed/'+nexmidi+'@2x.png 2x, {% static "" %}img/mixed/'+nexmidi+'@3x.png 3x" class="ic_circle"></div>'+
             '<div class="ui-name"><span>'+nexmidi+'</span></div>' +
             '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add_new" data-value="'+ nexmidi +'" data-append="'+premidi+'_'+nexmidi+'"></div>' +
             '<div class="left-item">' +
             '<img src="{% static "ic-play-black.png" %}" srcset="{% static "ic-play-black@2x.png" %} 2x, {% static "ic-play-black@3x.png" %} 3x" class="ic_play" data-value="'+ nexmidi +'">' +
-            '<audio src="{% static "" %}wave/middle/' + nexmidi + '.wav" class="audio_wave" type="audio/wav" id=' + nexmidi + ' ontimeupdate=recover(this)></audio></div></li>';
+            '<audio src="{% static "" %}wave/mixed/' + nexmidi + '.wav" class="audio_wave" type="audio/wav" id=' + nexmidi + ' ontimeupdate=recover(this)></audio></div></li>';
     return result;
   }
   var newnextwrap = function(premidi, nexmidi){
     var result = '<li class="ui-state-default midi_music" data-music="' + nexmidi + '">' +
             '<div class="ui-label" data-label="'+nexmidi+'">' +
-            '<img src="{% static "" %}img/middle/'+nexmidi+'.png" srcset="{% static "" %}img/middle/'+nexmidi+'@2x.png 2x, {% static "" %}img/middle/'+nexmidi+'@3x.png 3x" class="ic_circle"></div>'+
+            '<img src="{% static "" %}img/mixed/'+nexmidi+'.png" srcset="{% static "" %}img/mixed/'+nexmidi+'@2x.png 2x, {% static "" %}img/mixed/'+nexmidi+'@3x.png 3x" class="ic_circle"></div>'+
             '<div class="ui-name"><span>'+nexmidi+'</span></div>' +
             '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add_new" data-value="'+ nexmidi +'" data-append="'+premidi+'_'+nexmidi+'"></div>' +
             '<div class="left-item">' +
             '<img src="{% static "ic-play-black.png" %}" srcset="{% static "ic-play-black@2x.png" %} 2x, {% static "ic-play-black@3x.png" %} 3x" class="ic_play" data-value="'+ nexmidi +'">' +
-            '<audio src="{% static "" %}wave/middle/' + nexmidi + '.wav" class="audio_wave" type="audio/wav" id=' + nexmidi + ' ontimeupdate=recover(this)></audio></div></li>';
+            '<audio src="{% static "" %}wave/mixed/' + nexmidi + '.wav" class="audio_wave" type="audio/wav" id=' + nexmidi + ' ontimeupdate=recover(this)></audio></div></li>';
     return result;
   }
   var newintermidiwrap = function(premidi, nexmidi){
@@ -72,7 +72,7 @@
         +"<div class='btn_vae'></div>"
         +"<div class='left-item'>"
         +"<img src='{% static 'ic-play-black.png' %}' srcset='{% static 'ic-play-black@2x.png' %} 2x, {% static 'ic-play-black@3x.png' %} 3x' class='ic_play' data-value='"+premidi+"+"+nexmidi+"'>"
-        +"<audio src='{% static '' %}wave/middle/" +premidi+'+'+nexmidi+ ".wav' class='audio_wave' type='audio/wav' id=" +premidi+'+'+nexmidi+ " ontimeupdate=recover(this)></audio>"
+        +"<audio src='{% static '' %}wave/mixed/" +premidi+'+'+nexmidi+ ".wav' class='audio_wave' type='audio/wav' id=" +premidi+'+'+nexmidi+ " ontimeupdate=recover(this)></audio>"
         "</div></li>";
     return result;
     //+"<div class='btn_vae_delete' onclick='ungroup(" + ungroup_temp + ")'>X</div>"
@@ -140,7 +140,7 @@
       '<div class="btn_vae"><img src="{% static "ic-add.png" %}" srcset="{% static "ic-add@2x.png" %} 2x, {% static "ic-add@3x.png" %} 3x" class="ic_add" data-value="'+ next +'"></div>' +
       '<div class="left-item">' +
       '<img src="{% static "ic-play.png" %}" srcset="{% static "ic-play@2x.png" %} 2x, {% static "ic-play@3x.png" %} 3x" class="ic_play" data-value="'+ next +'">' +
-      '<audio src="{% static "" %}wave/middle/' + next + '.wav" class="audio_wave" type="audio/wav" ontimeupdate=recover(this)></audio></div></li>';
+      '<audio src="{% static "" %}wave/mixed/' + next + '.wav" class="audio_wave" type="audio/wav" ontimeupdate=recover(this)></audio></div></li>';
       group.outerHTML = prewrap + nextwrap;
   }
   var playing ;
@@ -181,7 +181,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="samdasu">
+    <div class="henry">
       <div class="rectangle_top">
         <span class="nav">
           <a>
@@ -195,11 +195,20 @@
           </a>
         </span>
       </div>
+      <div class="modal">
+        <div class="modal_content">
+          <img src="/static/icon-close.svg" class="icon_close">
+          <span class="nav_menu"><a href="/bright">밝은 느낌</a></span>
+          <span class="nav_menu"><a href="/dark">어두운 느낌</a></span>
+          <span class="nav_menu nav_active"><a href="/mixed">우리반 주제곡 만들기</a></span>
+          <span class="nav_menu"><a href="/dice">주사위</a></span>
+        </div>
+      </div>
       <ul class="rectangle_sortable" id="sortable">
          {% for midi in json_list %}
           <li class="ui-state-default target midi_music" data-music="{{ midi }}">
             <div class="ui-label" data-label={{midi}}>
-              <img src="{% static '' %}img/middle/{{ midi }}.png" srcset="{% static '' %}img/middle/{{ midi }}@2x.png 2x, {% static '' %}img/middle/{{ midi }}@3x.png 3x" class="ic_circle">
+              <img src="{% static '' %}img/mixed/{{ midi }}.png" srcset="{% static '' %}img/mixed/{{ midi }}@2x.png 2x, {% static '' %}img/mixed/{{ midi }}@3x.png 3x" class="ic_circle">
             </div>
             <div class="ui-name">
               <span>{{midi}}</span>
@@ -209,7 +218,7 @@
             </div>
             <div class="left-item">
               <img src="{% static 'ic-play-black.png' %}" srcset="{% static 'ic-play-black@2x.png' %} 2x, {% static 'ic-play-black@3x.png' %} 3x" class="ic_play" data-value="{{ midi }}">
-              <audio src="{% static '' %}wave/middle/{{midi}}.wav" class="audio_wave" type="audio/wav" id="{{midi}}" ontimeupdate=recover(this)></audio>
+              <audio src="{% static '' %}wave/mixed/{{midi}}.wav" class="audio_wave" type="audio/wav" id="{{midi}}" ontimeupdate=recover(this)></audio>
             </div>
           </li>
          {% endfor %}

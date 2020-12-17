@@ -48,10 +48,10 @@ def bright(request):
     np.random.shuffle(midi_list)
     return render(request, "midi/bright.html", {'json_list': midi_list})
 
-def purgatory(request):
+def mixed(request):
     midi_list = ['A','B','C','D','E','F','G','H','I','J','K','L']
     np.random.shuffle(midi_list)
-    return render(request, "midi/middle.html", {'json_list': midi_list})
+    return render(request, "midi/mixed.html", {'json_list': midi_list})
 
 def dice(request):
     return render(request, 'midi/dice.html')

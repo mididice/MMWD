@@ -181,7 +181,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="samdasu">
+    <div class="henry">
       <div class="rectangle_top">
         <span class="nav">
           <a>
@@ -194,6 +194,15 @@
             <img src="{% static 'ic-reset.png' %}" srcset="{% static 'ic-reset@2x.png' %} 2x, {% static 'ic-reset@3x.png' %} 3x" alt="reset">
           </a>
         </span>
+      </div>
+      <div class="modal">
+        <div class="modal_content">
+          <img src="/static/icon-close.svg" class="icon_close">
+          <span class="nav_menu"><a href="/bright">밝은 느낌</a></span>
+          <span class="nav_menu nav_active"><a href="/dark">어두운 느낌</a></span>
+          <span class="nav_menu"><a href="/mixed">우리반 주제곡 만들기</a></span>
+          <span class="nav_menu"><a href="/dice">주사위</a></span>
+        </div>
       </div>
       <ul class="rectangle_sortable" id="sortable">
          {% for midi in json_list %}
