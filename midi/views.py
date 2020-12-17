@@ -92,17 +92,14 @@ def download(request, type, slug):
 
 def dark(request):
     midi_list = ['A','B','C','D','E','F']
-    np.random.shuffle(midi_list)
     return render(request, "midi/dark.html", {'json_list': midi_list})
 
 def bright(request):
     midi_list = ['A','B','C','D','E','F']
-    np.random.shuffle(midi_list)
     return render(request, "midi/bright.html", {'json_list': midi_list})
 
 def mixed(request):
     midi_list = ['A','B','C','D','E','F','G','H','I','J','K','L']
-    np.random.shuffle(midi_list)
     return render(request, "midi/mixed.html", {'json_list': midi_list})
 
 def dice(request):
